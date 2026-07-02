@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Meddy Gironcelle
 
-## Getting Started
+Portfolio personnel au style **Bento** (grille de cartes modulaires), orienté
+**Communication & Marketing digital**.
 
-First, run the development server:
+**Stack :** Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · Framer Motion ·
+Lucide · next-intl (FR/EN).
+
+## Démarrage
+
+> Node.js ≥ 20.9 requis. Sur cette machine, Node est géré par **nvm** :
+> ```bash
+> nvm use            # lit la version dans .nvmrc (24)
+> ```
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install       # installer les dépendances
+npm run dev       # serveur de dev -> http://localhost:3000
+npm run build     # build de production
+npm run start     # servir le build de production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables d'environnement
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copier `.env.example` vers `.env.local` et renseigner les valeurs.
+`.env.local` n'est **jamais** commité (voir `.gitignore`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Rôle | Requis |
+|---|---|---|
+| `YOUTUBE_API_KEY` | Clé YouTube Data API v3 | Compteur YouTube en direct |
+| `YOUTUBE_CHANNEL_ID` | ID de la chaîne YouTube | Compteur YouTube en direct |
+| `GITHUB_USERNAME` | Pseudo GitHub (API publique) | Compteur GitHub en direct |
+| `SOCIAL_*_FOLLOWERS` | Replis manuels (Instagram, TikTok, LinkedIn…) | Facultatif |
 
-## Learn More
+Sans clé, l'app fonctionne : les compteurs indisponibles affichent le pseudo
+au lieu du nombre d'abonnés (dégradation propre).
 
-To learn more about Next.js, take a look at the following resources:
+## Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/            layout, page, api/social (route de stats réseaux)
+  components/
+    bento/        grille + carte de base animée
+    cards/        Profil, Réseaux, Stack, Localisation, Projets, Liens
+    theme/        provider + bouton clair/sombre
+    icons/        icônes de marque (SVG)
+  i18n/           config, cookie de langue, request next-intl
+  messages/       fr.json, en.json
+  lib/            socialStats (récupération des abonnés)
+public/projets/   visuels des réalisations
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement (Hostinger via GitHub)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Pousser le dépôt sur GitHub (branche `main`).
+2. Connecter le dépôt à Hostinger et activer le déploiement automatique à
+   chaque push.
+3. **Node.js SSR requis** : ce projet utilise des Server Components, une API
+   route et des cookies (i18n) — il ne peut pas être exporté en statique.
+   Choisir une offre Hostinger supportant une app **Node.js** (build
+   `npm run build`, démarrage `npm run start`), version Node **≥ 20.9**.
+4. Renseigner les variables d'environnement (tableau ci-dessus) côté hébergeur
+   avant le premier build.
