@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Meddy Gironcelle — Digital Communication & Marketing",
+    "description": "Portfolio of Meddy Gironcelle, digital communication and marketing specialist. Work for CMA Réunion and EDF: editorial lines, Instagram carousels, audits and campaigns."
+  },
+  "profile": {
+    "name": "Meddy Gironcelle",
+    "role": "Digital Communication & Marketing",
+    "statusAvailable": "Available for a position",
+    "bio": "[To complete] Short bio to be provided. Digital communication and marketing specialist, focused on content strategy and social media in Réunion Island.",
+    "photoAlt": "Profile picture of Meddy Gironcelle",
+    "photoPlaceholder": "Photo to add"
+  },
+  "social": {
+    "title": "Social networks",
+    "followersLabel": "followers",
+    "visit": "View profile"
+  },
+  "stack": {
+    "title": "Skills & tools",
+    "subtitle": "Communication, design and data"
+  },
+  "location": {
+    "title": "Location",
+    "region": "Réunion Island (974)",
+    "placeholder": "Address needed to center the map"
+  },
+  "projects": {
+    "title": "Work",
+    "subtitle": "CMA Réunion & EDF internships",
+    "carrousels": {
+      "title": "CMA Instagram carousels",
+      "description": "A series of 8 carousels on Réunion craft trades."
+    },
+    "ligne": {
+      "title": "2026 digital editorial line",
+      "description": "Instagram content strategy and schedule for CMA Réunion."
+    },
+    "pain": {
+      "title": "Bread Festival 2026 poster",
+      "description": "Graphic design of the event's official poster."
+    },
+    "metisse": {
+      "title": "Métisse magazine pages",
+      "description": "Design of two pages for Métisse magazine."
+    },
+    "brasPanon": {
+      "title": "Bras-Panon agricultural fair",
+      "description": "Social posts (feed & story) for the agricultural fair."
+    },
+    "mode": {
+      "title": "CMAR Facebook posts",
+      "description": "Facebook cover and posts for the Chamber of Trades."
+    }
+  },
+  "links": {
+    "title": "Useful links",
+    "cma": "CMA Réunion",
+    "edf": "EDF Réunion",
+    "resume": "Download my résumé"
+  },
+  "controls": {
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Toggle language",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js & Tailwind CSS."
+  }
+}

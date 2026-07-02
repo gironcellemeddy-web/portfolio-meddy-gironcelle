@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Meddy Gironcelle — Communication & Marketing digital",
+    "description": "Portfolio de Meddy Gironcelle, chargé de communication et marketing digital. Réalisations pour la CMA Réunion et EDF : lignes éditoriales, carrousels Instagram, audits et campagnes."
+  },
+  "profile": {
+    "name": "Meddy Gironcelle",
+    "role": "Communication & Marketing digital",
+    "statusAvailable": "Disponible pour un poste",
+    "bio": "[À compléter] Courte bio à fournir. Étudiant / chargé de communication et marketing digital, spécialisé dans les stratégies de contenu et les réseaux sociaux à La Réunion.",
+    "photoAlt": "Photo de profil de Meddy Gironcelle",
+    "photoPlaceholder": "Photo à ajouter"
+  },
+  "social": {
+    "title": "Réseaux sociaux",
+    "followersLabel": "abonnés",
+    "visit": "Voir le profil"
+  },
+  "stack": {
+    "title": "Compétences & outils",
+    "subtitle": "Communication, création et data"
+  },
+  "location": {
+    "title": "Localisation",
+    "region": "La Réunion (974)",
+    "placeholder": "Adresse à fournir pour centrer la carte"
+  },
+  "projects": {
+    "title": "Réalisations",
+    "subtitle": "Stages CMA Réunion & EDF",
+    "carrousels": {
+      "title": "Carrousels Instagram CMA",
+      "description": "Série de 8 carrousels sur les métiers de l'artisanat réunionnais."
+    },
+    "ligne": {
+      "title": "Ligne éditoriale digitale 2026",
+      "description": "Stratégie et planning éditorial Instagram pour la CMA Réunion."
+    },
+    "pain": {
+      "title": "Affiche Fête du Pain 2026",
+      "description": "Création graphique de l'affiche officielle de l'événement."
+    },
+    "metisse": {
+      "title": "Pages magazine Métisse",
+      "description": "Conception de deux pages pour le magazine Métisse."
+    },
+    "brasPanon": {
+      "title": "Foire agricole de Bras-Panon",
+      "description": "Publications réseaux (post & story) pour la foire agricole."
+    },
+    "mode": {
+      "title": "Publications Facebook CMAR",
+      "description": "Couverture et posts Facebook pour la Chambre de Métiers."
+    }
+  },
+  "links": {
+    "title": "Liens utiles",
+    "cma": "CMA Réunion",
+    "edf": "EDF Réunion",
+    "resume": "Télécharger mon CV"
+  },
+  "controls": {
+    "toggleTheme": "Changer de thème",
+    "toggleLanguage": "Changer de langue",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "builtWith": "Conçu avec Next.js & Tailwind CSS."
+  }
+}
