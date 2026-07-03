@@ -11,34 +11,19 @@ type BentoCardProps = {
   index?: number;
 };
 
-// Carte réutilisable : conteneur visuel + survol animé (Framer Motion).
-// L'apparition est gérée en CSS (classe .bento-card) pour rester robuste :
-// le contenu est visible même si le JS ne s'exécute pas. Framer Motion ne
-// pilote que le survol, sans jamais masquer le contenu.
+// Carte réutilisable : conteneur épuré + survol subtil (Framer Motion).
+// L'apparition est gérée en CSS (.bento-card) pour rester robuste : le contenu
+// est visible même sans JS. Framer Motion ne pilote que le survol.
 export function BentoCard({ children, className = "", index = 0 }: BentoCardProps) {
   const reduceMotion = useReducedMotion();
 
   return (
     <motion.section
       style={{ animationDelay: `${index * 55}ms` }}
-      whileHover={reduceMotion ? undefined : { y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className={`bento-card group relative overflow-hidden rounded-3xl border border-card-border bg-card p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.12)] transition-shadow hover:shadow-[0_1px_2px_rgba(0,0,0,0.06),0_18px_40px_-16px_rgba(0,0,0,0.28)] ${className}`}
+      whileHover={reduceMotion ? undefined : { y: -3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className={`bento-card group relative overflow-hidden rounded-[var(--radius-bento)] border border-card-border bg-card p-5 shadow-[0_1px_2px_rgba(40,40,40,0.03),0_10px_28px_-14px_rgba(40,40,40,0.14)] transition-shadow hover:shadow-[0_2px_4px_rgba(40,40,40,0.04),0_18px_38px_-16px_rgba(40,40,40,0.22)] ${className}`}
     >
-      {/* Liseré dégradé qui s'illumine au survol */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          padding: "1px",
-          background:
-            "linear-gradient(130deg, var(--accent), transparent 40%, transparent 60%, var(--accent-2))",
-          WebkitMask:
-            "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-        }}
-      />
       {children}
     </motion.section>
   );
