@@ -3,12 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
-import {
-  getProject,
-  projectImages,
-  projectTitle,
-  projects,
-} from "@/lib/projects";
+import { getProject, projectTitle, projects } from "@/lib/projects";
 import { ProjectDetailGallery } from "@/components/projects/ProjectDetailGallery";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -35,7 +30,7 @@ export default async function ProjectPage({ params }: Params) {
 
   const locale = await getLocale();
   const t = await getTranslations("projects");
-  const images = projectImages(p);
+  const images = p.images;
 
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-6 sm:px-6 sm:py-10">

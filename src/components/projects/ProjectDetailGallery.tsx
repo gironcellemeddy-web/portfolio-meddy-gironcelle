@@ -5,14 +5,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import type { ProjectImage } from "@/lib/projects";
 
-// Affiche toutes les images d'une réalisation en grille. Toutes sont visibles
-// directement (consultables) ; un clic ouvre l'image en grand (lightbox).
+// Affiche toutes les images d'une réalisation en masonry : chaque cadre épouse
+// le format natif de l'image (aucun rognage). Un clic ouvre l'image en grand.
 export function ProjectDetailGallery({
   images,
   title,
 }: {
-  images: string[];
+  images: ProjectImage[];
   title: string;
 }) {
   const t = useTranslations("projects");
@@ -44,23 +45,26 @@ export function ProjectDetailGallery({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {images.map((src, i) => (
+      <div className="columns-1 gap-4 sm:columns-2 [&>button]:mb-4">
+        {images.map((im, i) => (
           <button
-            key={src}
+            key={im.src}
             onClick={() => setActive(i)}
-            className="group relative aspect-[4/5] overflow-hidden rounded-[var(--radius-bento)] border-[1.5px] border-card-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group relative block w-full break-inside-avoid overflow-hidden rounded-[var(--radius-bento)] border-[1.5px] border-card-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Image
-              src={src}
+              src={im.src}
               alt={`${title} — ${i + 1}`}
-              fill
+              width={im.width}
+              height={im.height}
               sizes="(max-width: 640px) 100vw, 50vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
             />
-            <span className="absolute bottom-2 left-2 rounded-full bg-black/50 px-2 py-0.5 text-[11px] font-semibold text-white backdrop-blur">
-              {i + 1} / {images.length}
-            </span>
+            {images.length > 1 && (
+              <span className="absolute bottom-2 left-2 rounded-full bg-black/50 px-2 py-0.5 text-[11px] font-semibold text-white backdrop-blur">
+                {i + 1} / {images.length}
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -97,7 +101,7 @@ export function ProjectDetailGallery({
               className="relative flex max-h-[90vh] max-w-2xl flex-col"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={images[active]} alt={`${title} — ${active + 1}`} className="min-h-0 flex-1 rounded-lg object-contain shadow-2xl" />
+              <img src={images[active].src} alt={`${title} — ${active + 1}`} className="min-h-0 flex-1 rounded-lg object-contain shadow-2xl" />
               <p className="mt-2 text-center text-xs text-white/60">{active + 1} / {images.length}</p>
             </motion.div>
           </motion.div>
