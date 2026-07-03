@@ -28,6 +28,10 @@
   "projects": {
     "title": "Work",
     "subtitle": "CMA Réunion & EDF internships",
+    "view": "View",
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next",
     "carrousels": {
       "title": "CMA Instagram carousels",
       "description": "A series of 8 carousels on Réunion craft trades."

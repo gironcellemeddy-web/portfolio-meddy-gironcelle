@@ -11,21 +11,27 @@
   --card: #ffffff;
   --card-border: #e4e4e7;
   --muted: #71717a;
-  --accent: #2563eb;
+  --accent: #6366f1;
+  --accent-2: #ec4899;
   --accent-foreground: #ffffff;
+  --glow-1: rgba(99, 102, 241, 0.18);
+  --glow-2: rgba(236, 72, 153, 0.14);
   /* Synchronise les éléments natifs (scrollbars, champs) avec le thème */
   color-scheme: light;
 }
 
 .dark {
   /* Palette sombre */
-  --background: #09090b;
+  --background: #08080b;
   --foreground: #fafafa;
-  --card: #18181b;
-  --card-border: #27272a;
+  --card: #141418;
+  --card-border: #26262c;
   --muted: #a1a1aa;
-  --accent: #3b82f6;
+  --accent: #818cf8;
+  --accent-2: #f472b6;
   --accent-foreground: #ffffff;
+  --glow-1: rgba(99, 102, 241, 0.22);
+  --glow-2: rgba(236, 72, 153, 0.16);
   color-scheme: dark;
 }
 
@@ -36,6 +42,7 @@
   --color-card-border: var(--card-border);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -45,6 +52,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  position: relative;
+}
+
+/* Halos d'ambiance colorés, discrets, derrière le contenu. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 60rem at 12% -8%, var(--glow-1), transparent 60%),
+    radial-gradient(50rem 50rem at 100% 8%, var(--glow-2), transparent 55%);
 }
 
 /* Transition douce lors du changement de thème */
@@ -53,24 +73,55 @@ body {
   transition-duration: 200ms;
 }
 
+/* Texte en dégradé (titres accent). */
+.gradient-text {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Apparition des cartes en CSS pur : jouée par le navigateur, sans dépendre
    du JS ni de l'hydratation. Le contenu reste donc visible en toutes
    circonstances (état de repos = opacity:1). */
 @keyframes bento-in {
   from {
     opacity: 0;
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .bento-card {
-  animation: bento-in 0.45s ease-out both;
+  animation: bento-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Défilement horizontal continu (marquee des compétences). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bento-card {
+    animation: none;
+  }
+  .marquee-track {
     animation: none;
   }
 }

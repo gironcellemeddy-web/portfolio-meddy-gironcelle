@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Download, ExternalLink } from "lucide-react";
+import { ArrowRight, Download, ExternalLink } from "lucide-react";
 import { BentoCard } from "@/components/bento/BentoCard";
 
 type UsefulLink = {
@@ -10,7 +10,7 @@ type UsefulLink = {
 
 // Liens externes pertinents (SEO). Le CV est un placeholder à déposer dans /public.
 const links: UsefulLink[] = [
-  { key: "cma", href: "https://www.cma-reunion.fr" },
+  { key: "cma", href: "https://www.artisanat974.re" },
   { key: "edf", href: "https://reunion.edf.fr" },
   { key: "resume", href: "#", download: true },
 ];
@@ -30,14 +30,19 @@ export function LinksCard({ index }: { index?: number }) {
               href={l.href}
               target={l.download ? undefined : "_blank"}
               rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-2xl border border-card-border bg-background px-4 py-3 text-sm font-medium text-foreground transition-colors hover:text-accent"
+              className="group/link flex items-center justify-between rounded-2xl border border-card-border bg-background px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
             >
-              {t(l.key)}
-              {l.download ? (
-                <Download className="h-4 w-4" />
-              ) : (
-                <ExternalLink className="h-4 w-4" />
-              )}
+              <span className="flex items-center gap-2.5">
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  {l.download ? (
+                    <Download className="h-4 w-4" />
+                  ) : (
+                    <ExternalLink className="h-4 w-4" />
+                  )}
+                </span>
+                {t(l.key)}
+              </span>
+              <ArrowRight className="h-4 w-4 -translate-x-1 opacity-0 transition-all group-hover/link:translate-x-0 group-hover/link:opacity-100" />
             </a>
           </li>
         ))}

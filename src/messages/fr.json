@@ -28,6 +28,10 @@
   "projects": {
     "title": "Réalisations",
     "subtitle": "Stages CMA Réunion & EDF",
+    "view": "Voir",
+    "close": "Fermer",
+    "prev": "Précédent",
+    "next": "Suivant",
     "carrousels": {
       "title": "Carrousels Instagram CMA",
       "description": "Série de 8 carrousels sur les métiers de l'artisanat réunionnais."

@@ -35,14 +35,17 @@ export function StackCard({ index }: { index?: number }) {
       <div className="flex flex-col gap-3">
         {groups.map((g, i) => (
           <div key={i} className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white shadow-sm"
+              style={{ background: "linear-gradient(135deg, var(--accent), var(--accent-2))" }}
+            >
               <g.Icon className="h-4 w-4" />
             </span>
             <div className="flex flex-wrap gap-1.5">
               {g.tools.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-lg bg-background px-2 py-1 text-xs font-medium text-foreground ring-1 ring-card-border"
+                  className="rounded-lg bg-background px-2 py-1 text-xs font-medium text-foreground ring-1 ring-card-border transition-colors hover:ring-accent hover:text-accent"
                 >
                   {tool}
                 </span>

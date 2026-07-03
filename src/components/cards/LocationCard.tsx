@@ -18,6 +18,7 @@ export function LocationCard({ index }: { index?: number }) {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card to-transparent" />
         <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-card/90 px-3 py-1.5 text-sm font-medium shadow-sm backdrop-blur ring-1 ring-card-border">
           <MapPin className="h-4 w-4 text-accent" />
           {t("region")}
