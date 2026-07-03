@@ -1,78 +1,162 @@
 @import "tailwindcss";
 
 :root {
-  /* Palette : blanc / noir / bleu / orange */
-  --background: #fbfbfa;
-  --foreground: #0f1012;
-  --card: #ffffff;
-  --card-border: #e8e8e6;
-  --muted: #6b6f76;
-  --accent: #2563eb; /* bleu — interactif (liens, survols) */
-  --accent-2: #f26522; /* orange — accents chauds (CTA, highlights) */
-  --accent-soft: #eef3ff; /* bleu très pâle */
-  --accent-2-soft: #fdece2; /* orange très pâle */
-  --accent-foreground: #ffffff;
+  /* Base premium : papier chaud + encre presque noire */
+  --paper: #f5f4ef;
+  --ink: #0c0c0e;
+  --surface: #ffffff;
+  --surface-2: #faf9f5;
+  --line: #e6e4dc;
+  --muted: #6c6a63;
+  --muted-2: #9a978e;
+  /* Accents : orange braise (signature) + cobalt (fonctionnel) */
+  --ember: #ef5a17;
+  --ember-2: #ff7a3d;
+  --ember-soft: #fce7db;
+  --cobalt: #2a52e0;
+  --cobalt-soft: #e8ecfc;
   color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-border: var(--card-border);
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-2-soft: var(--accent-2-soft);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-2: var(--muted-2);
+  --color-ember: var(--ember);
+  --color-ember-2: var(--ember-2);
+  --color-ember-soft: var(--ember-soft);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-soft: var(--cobalt-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-display);
-  --radius-bento: 1.5rem;
+  --radius-xl2: 1.75rem;
+}
+
+* {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans), -apple-system, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Titres : grotesk moderne. */
 .font-display {
   font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
-/* Halos d'ambiance discrets bleu + orange. */
-body::before {
+/* Chip / label mono premium */
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Surface verre (header, badges) */
+.glass {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+/* Ombres élégantes, en couches */
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(12, 12, 14, 0.04),
+    0 8px 20px -12px rgba(12, 12, 14, 0.16);
+}
+.shadow-lift {
+  box-shadow:
+    0 2px 6px rgba(12, 12, 14, 0.05),
+    0 26px 50px -24px rgba(12, 12, 14, 0.28);
+}
+
+/* Texte en dégradé braise */
+.text-gradient {
+  background: linear-gradient(100deg, var(--ember) 0%, var(--ember-2) 60%, var(--ember) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Reveal au scroll (piloté par IntersectionObserver → classe .is-in).
+   Transition CSS pure : fonctionne sans requestAnimationFrame. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Grain de film discret, au-dessus de tout, non interactif */
+body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 9999;
   pointer-events: none;
-  background:
-    radial-gradient(48rem 48rem at 8% -6%, rgba(37, 99, 235, 0.06), transparent 60%),
-    radial-gradient(44rem 44rem at 100% 4%, rgba(242, 101, 34, 0.07), transparent 58%);
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Apparition en CSS pur (opacité seule pour ne pas entrer en conflit avec le
-   tilt 3D qui pilote transform). Contenu toujours visible sans JS. */
-@keyframes bento-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* Flottement lent de l'objet signature (CSS → tourne sans rAF JS). */
+@keyframes floaty {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -16px, 0); }
 }
+.animate-floaty { animation: floaty 7s ease-in-out infinite; }
 
-.bento-card {
-  animation: bento-in 0.5s ease-out both;
+/* Reveal de ligne par masque (typo hero). */
+.line-mask { overflow: hidden; display: block; }
+.line-inner {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--line-delay, 0ms);
+}
+.is-in .line-inner,
+.line-mask.is-in .line-inner { transform: translateY(0); }
+
+/* Ancrage sous le header sticky */
+.anchor { scroll-margin-top: 6rem; }
+
+html {
+  scroll-behavior: smooth;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bento-card {
-    animation: none;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .line-inner { transform: none; transition: none; }
+  .animate-floaty { animation: none; }
+  html { scroll-behavior: auto; }
+  * {
+    transition-duration: 0.01ms !important;
   }
 }

@@ -58,7 +58,7 @@ export function BackgroundDecor() {
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Soleil (haut-droite) */}
       <div ref={setRef(0)} className="absolute -right-16 -top-20 h-80 w-80 will-change-transform">
-        <svg className="h-full w-full text-accent-2" viewBox="0 0 200 200" fill="none">
+        <svg className="h-full w-full text-ember" viewBox="0 0 200 200" fill="none">
           <circle cx="100" cy="100" r="52" fill="currentColor" opacity="0.1" />
           <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.16">
             {Array.from({ length: 12 }).map((_, i) => {
@@ -80,7 +80,7 @@ export function BackgroundDecor() {
       {/* Pailles-en-queue (oiseaux) */}
       <div ref={setRef(1)} className="absolute left-[18%] top-[12%] h-24 w-48 will-change-transform">
         <svg
-          className="h-full w-full text-foreground opacity-[0.18]"
+          className="h-full w-full text-ink opacity-[0.18]"
           viewBox="0 0 200 80"
           fill="none"
           stroke="currentColor"
@@ -94,13 +94,13 @@ export function BackgroundDecor() {
 
       {/* Hibiscus (fleur) */}
       <div ref={setRef(2)} className="absolute right-[10%] top-[42%] h-28 w-28 will-change-transform">
-        <svg className="h-full w-full text-accent-2 opacity-[0.14]" viewBox="0 0 100 100">
+        <svg className="h-full w-full text-ember opacity-[0.14]" viewBox="0 0 100 100">
           <g fill="currentColor">
             {[0, 1, 2, 3, 4].map((i) => (
               <ellipse key={i} cx="50" cy="28" rx="13" ry="22" transform={`rotate(${i * 72} 50 50)`} />
             ))}
           </g>
-          <circle cx="50" cy="50" r="8" fill="var(--accent)" opacity="0.6" />
+          <circle cx="50" cy="50" r="8" fill="var(--cobalt)" opacity="0.6" />
         </svg>
       </div>
 
@@ -112,7 +112,7 @@ export function BackgroundDecor() {
       {/* Vagues (océan) */}
       <div ref={setRef(4)} className="absolute bottom-[26%] left-0 h-28 w-full will-change-transform">
         <svg
-          className="h-full w-full text-accent opacity-[0.14]"
+          className="h-full w-full text-cobalt opacity-[0.14]"
           viewBox="0 0 1440 120"
           fill="none"
           stroke="currentColor"
@@ -127,14 +127,14 @@ export function BackgroundDecor() {
 
       {/* Relief volcanique — plan arrière */}
       <div ref={setRef(5)} className="absolute bottom-0 left-0 h-[46vh] w-full will-change-transform">
-        <svg className="h-full w-full text-accent opacity-[0.07]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
+        <svg className="h-full w-full text-cobalt opacity-[0.07]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
           <path d="M0 360 L0 210 L170 130 L320 195 L470 100 L610 180 L770 80 L910 170 L1080 120 L1240 195 L1440 140 L1440 360 Z" fill="currentColor" />
         </svg>
       </div>
 
       {/* Relief volcanique — plan avant (pic central type Piton) */}
       <div ref={setRef(6)} className="absolute bottom-0 left-0 h-[40vh] w-full will-change-transform">
-        <svg className="h-full w-full text-foreground opacity-[0.06]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
+        <svg className="h-full w-full text-ink opacity-[0.06]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
           <path d="M0 360 L0 300 L180 255 L330 285 L470 205 L560 245 L660 150 L760 250 L900 215 L1060 280 L1220 235 L1440 295 L1440 360 Z" fill="currentColor" />
         </svg>
       </div>

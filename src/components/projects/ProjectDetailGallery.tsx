@@ -50,7 +50,7 @@ export function ProjectDetailGallery({
           <button
             key={im.src}
             onClick={() => setActive(i)}
-            className="group relative block w-full break-inside-avoid overflow-hidden rounded-[var(--radius-bento)] border border-card-border transition-colors hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group relative block w-full break-inside-avoid overflow-hidden rounded-[var(--radius-xl2)] border border-line transition-colors hover:border-cobalt focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt"
           >
             <Image
               src={im.src}

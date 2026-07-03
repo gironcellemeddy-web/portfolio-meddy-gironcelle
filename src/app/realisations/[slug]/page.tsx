@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Params) {
       <header className="mb-10 flex items-center justify-between">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
         >
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           {t("back")}
@@ -43,7 +43,7 @@ export default async function ProjectPage({ params }: Params) {
         <span className="font-display text-lg font-black tracking-tight">MG</span>
       </header>
 
-      <div className="mb-8 border-b-[1.5px] border-card-border pb-6">
+      <div className="mb-8 border-b-[1.5px] border-line pb-6">
         <p className="text-xs font-medium uppercase tracking-[0.15em] text-muted">
           {p.type} · {images.length} {t("imagesLabel")}
         </p>
