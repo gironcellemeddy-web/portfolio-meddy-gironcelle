@@ -31,7 +31,9 @@
   "projects": {
     "title": "Réalisations",
     "subtitle": "Stages CMA Réunion & EDF",
-    "count": "16 projets",
+    "count": "13 réalisations",
+    "back": "Retour",
+    "imagesLabel": "images",
     "view": "Voir",
     "close": "Fermer",
     "prev": "Précédent",

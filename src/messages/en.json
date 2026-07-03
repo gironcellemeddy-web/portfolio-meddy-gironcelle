@@ -31,7 +31,9 @@
   "projects": {
     "title": "Work",
     "subtitle": "CMA Réunion & EDF internships",
-    "count": "16 projects",
+    "count": "13 works",
+    "back": "Back",
+    "imagesLabel": "images",
     "view": "View",
     "close": "Close",
     "prev": "Previous",
