@@ -61,35 +61,39 @@ export function ProjectsGallery() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 md:auto-rows-[8.5rem] md:grid-cols-3">
         {projects.map((p, i) => (
           <button
             key={p.img}
             onClick={() => setActive(i)}
-            className="group/tile relative aspect-square overflow-hidden rounded-2xl ring-1 ring-card-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className={`group/tile relative overflow-hidden rounded-[var(--radius-bento)] border-[1.5px] border-card-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+              i === 0 ? "col-span-2 row-span-2 aspect-square md:aspect-auto" : "aspect-square md:aspect-auto"
+            }`}
           >
             <Image
               src={p.img}
               alt={title(p)}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-              className="object-cover transition-transform duration-500 group-hover/tile:scale-110"
+              sizes="(max-width: 768px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover/tile:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90 transition-opacity group-hover/tile:opacity-100" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-90 transition-opacity group-hover/tile:opacity-100" />
             <span className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover/tile:opacity-100">
               <Maximize2 className="h-3.5 w-3.5" />
             </span>
             <div className="absolute inset-x-0 bottom-0 p-3 text-left">
-              <p className="text-[10px] font-medium uppercase tracking-wide text-white/60">
+              <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/60">
                 {p.type}
               </p>
-              <p className="truncate text-xs font-semibold text-white">{title(p)}</p>
+              <p className={`truncate font-semibold text-white ${i === 0 ? "text-base" : "text-xs"}`}>
+                {title(p)}
+              </p>
             </div>
           </button>
         ))}
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox — image agrandie au clic */}
       <AnimatePresence>
         {active !== null && (
           <motion.div
@@ -99,25 +103,13 @@ export function ProjectsGallery() {
             onClick={close}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
           >
-            <button
-              onClick={close}
-              aria-label={t("close")}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
+            <button onClick={close} aria-label={t("close")} className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20">
               <X className="h-5 w-5" />
             </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); go(-1); }}
-              aria-label={t("prev")}
-              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
+            <button onClick={(e) => { e.stopPropagation(); go(-1); }} aria-label={t("prev")} className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20">
               <ChevronLeft className="h-6 w-6" />
             </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); go(1); }}
-              aria-label={t("next")}
-              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
+            <button onClick={(e) => { e.stopPropagation(); go(1); }} aria-label={t("next")} className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20">
               <ChevronRight className="h-6 w-6" />
             </button>
 
@@ -131,21 +123,11 @@ export function ProjectsGallery() {
               className="flex max-h-[88vh] max-w-2xl flex-col items-center"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={projects[active].img}
-                alt={title(projects[active])}
-                className="min-h-0 flex-1 rounded-2xl object-contain shadow-2xl"
-              />
-              <figcaption className="mt-3 text-center">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-white/60">
-                  {projects[active].type}
-                </p>
-                <p className="text-base font-semibold text-white">
-                  {title(projects[active])}
-                </p>
-                <p className="mt-1 text-xs text-white/50">
-                  {active + 1} / {projects.length}
-                </p>
+              <img src={projects[active].img} alt={title(projects[active])} className="min-h-0 flex-1 rounded-lg object-contain shadow-2xl" />
+              <figcaption className="mt-3 text-center text-white">
+                <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/60">{projects[active].type}</p>
+                <p className="text-base font-semibold">{title(projects[active])}</p>
+                <p className="mt-1 text-xs text-white/50">{active + 1} / {projects.length}</p>
               </figcaption>
             </motion.figure>
           </motion.div>

@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
-/* Mode sombre via classe .dark sur <html> (toggle manuel). */
+/* Mode sombre via classe .dark sur <html> (toggle manuel). Clair par défaut. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Palette claire, neutre et chaleureuse (inspiration jessbayer.com) */
-  --background: #f3f2ee;
-  --foreground: #282828;
-  --card: #ffffff;
-  --card-border: #eae8e2;
-  --muted: #9a988f;
-  --accent: #ec6142;
-  --accent-soft: #fbe9e4;
-  --accent-foreground: #ffffff;
+  /* Thème clair = charte jessbayer : orange vif + noir, éditorial flat */
+  --background: #e8562c;
+  --foreground: #17130f;
+  --card: transparent;
+  --card-border: #17130f;
+  --muted: #6f3922;
+  --accent: #17130f;
+  --accent-soft: rgba(23, 19, 15, 0.08);
+  --accent-foreground: #e8562c;
   color-scheme: light;
 }
 
 .dark {
-  /* Pendant sombre, tout aussi neutre */
-  --background: #191817;
-  --foreground: #f2f1ee;
-  --card: #232221;
-  --card-border: #34322f;
-  --muted: #8f8d86;
-  --accent: #f47458;
-  --accent-soft: #3a2622;
-  --accent-foreground: #ffffff;
+  /* Pendant sombre : noir chaud + crème, l'orange devient l'accent */
+  --background: #17130f;
+  --foreground: #f4ede3;
+  --card: transparent;
+  --card-border: #f4ede3;
+  --muted: #b39c86;
+  --accent: #e8562c;
+  --accent-soft: rgba(232, 86, 44, 0.16);
+  --accent-foreground: #17130f;
   color-scheme: dark;
 }
 
@@ -40,7 +40,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --radius-bento: 1.75rem;
+  --font-display: var(--font-display);
+  --radius-bento: 1rem;
 }
 
 body {
@@ -50,14 +51,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Titres éditoriaux : serif haute-contraste. */
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
 /* Transition douce lors du changement de thème */
 * {
   transition-property: background-color, border-color, color;
   transition-duration: 200ms;
 }
 
-/* Apparition des cartes en CSS pur : jouée par le navigateur, sans dépendre
-   du JS ni de l'hydratation. Le contenu reste visible en toutes circonstances. */
+/* Apparition en CSS pur : jouée par le navigateur, contenu toujours visible. */
 @keyframes bento-in {
   from {
     opacity: 0;

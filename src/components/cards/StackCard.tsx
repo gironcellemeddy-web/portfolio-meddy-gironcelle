@@ -16,9 +16,9 @@ type SkillGroup = {
 
 // Compétences déduites des réalisations de stage — à ajuster librement.
 const groups: SkillGroup[] = [
-  { Icon: PenTool, tools: ["Canva", "Photoshop", "Illustrator"] },
+  { Icon: PenTool, tools: ["Canva", "Illustrator"] },
   { Icon: Share2, tools: ["Instagram", "Meta Business", "TikTok"] },
-  { Icon: Video, tools: ["Premiere Pro", "CapCut"] },
+  { Icon: Video, tools: ["CapCut"] },
   { Icon: BarChart3, tools: ["Google Ads", "Analytics", "Trends"] },
   { Icon: FileSpreadsheet, tools: ["Excel", "Notion"] },
 ];
@@ -28,21 +28,21 @@ export function StackCard({ index }: { index?: number }) {
 
   return (
     <BentoCard index={index} className="md:col-span-2 flex flex-col">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
+      <h2 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">
         {t("title")}
       </h2>
       <p className="mb-4 mt-1 text-xs text-muted">{t("subtitle")}</p>
       <div className="flex flex-col gap-3">
         {groups.map((g, i) => (
           <div key={i} className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-[1.5px] border-card-border">
               <g.Icon className="h-4 w-4" />
             </span>
             <div className="flex flex-wrap gap-1.5">
               {g.tools.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-lg bg-background px-2 py-1 text-xs font-medium text-foreground ring-1 ring-card-border transition-colors hover:ring-accent hover:text-accent"
+                  className="rounded-full border-[1.5px] border-card-border px-2.5 py-1 text-xs font-medium transition-colors hover:bg-foreground hover:text-background"
                 >
                   {tool}
                 </span>

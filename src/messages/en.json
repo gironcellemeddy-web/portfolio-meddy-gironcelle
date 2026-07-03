@@ -5,6 +5,9 @@
   },
   "profile": {
     "name": "Meddy Gironcelle",
+    "firstName": "Meddy",
+    "lastName": "Gironcelle",
+    "cv": "Download my résumé",
     "role": "Digital Communication & Marketing",
     "statusAvailable": "Available for a position",
     "bio": "[To complete] Short bio to be provided. Digital communication and marketing specialist, focused on content strategy and social media in Réunion Island.",
@@ -28,6 +31,7 @@
   "projects": {
     "title": "Work",
     "subtitle": "CMA Réunion & EDF internships",
+    "count": "16 projects",
     "view": "View",
     "close": "Close",
     "prev": "Previous",

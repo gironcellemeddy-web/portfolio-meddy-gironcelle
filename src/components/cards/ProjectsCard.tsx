@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { FolderGit2 } from "lucide-react";
 import { BentoCard } from "@/components/bento/BentoCard";
 import { ProjectsGallery } from "./ProjectsGallery";
 
@@ -8,14 +7,18 @@ export function ProjectsCard({ index }: { index?: number }) {
 
   return (
     <BentoCard index={index} className="md:col-span-4">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-          <FolderGit2 className="h-5 w-5" />
-        </span>
+      <div className="mb-5 flex items-end justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold tracking-tight">{t("title")}</h2>
-          <p className="text-xs text-muted">{t("subtitle")}</p>
+          <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+            {t("title")}
+          </h2>
+          <p className="mt-1 text-xs uppercase tracking-[0.12em] text-muted">
+            {t("subtitle")}
+          </p>
         </div>
+        <span className="hidden shrink-0 text-sm font-medium text-muted sm:block">
+          {t("count")}
+        </span>
       </div>
 
       <ProjectsGallery />

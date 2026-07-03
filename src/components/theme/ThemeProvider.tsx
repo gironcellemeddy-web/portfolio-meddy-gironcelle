@@ -58,8 +58,8 @@ export const themeInitScript = `
 (function() {
   try {
     var stored = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var theme = stored || (prefersDark ? 'dark' : 'light');
+    // Clair par défaut (on ne suit plus la préférence système).
+    var theme = stored || 'light';
     if (theme === 'dark') document.documentElement.classList.add('dark');
   } catch (e) {}
 })();

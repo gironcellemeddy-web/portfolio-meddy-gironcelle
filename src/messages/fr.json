@@ -5,6 +5,9 @@
   },
   "profile": {
     "name": "Meddy Gironcelle",
+    "firstName": "Meddy",
+    "lastName": "Gironcelle",
+    "cv": "Télécharger mon CV",
     "role": "Communication & Marketing digital",
     "statusAvailable": "Disponible pour un poste",
     "bio": "[À compléter] Courte bio à fournir. Étudiant / chargé de communication et marketing digital, spécialisé dans les stratégies de contenu et les réseaux sociaux à La Réunion.",
@@ -28,6 +31,7 @@
   "projects": {
     "title": "Réalisations",
     "subtitle": "Stages CMA Réunion & EDF",
+    "count": "16 projets",
     "view": "Voir",
     "close": "Fermer",
     "prev": "Précédent",
