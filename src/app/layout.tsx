@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
+import { BackgroundDecor } from "@/components/decor/BackgroundDecor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <BackgroundDecor />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
