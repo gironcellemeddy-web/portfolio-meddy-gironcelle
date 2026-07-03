@@ -10,7 +10,7 @@
     "cv": "Download my résumé",
     "role": "Digital Communication & Marketing",
     "statusAvailable": "Available for a position",
-    "bio": "[To complete] Short bio to be provided. Digital communication and marketing specialist, focused on content strategy and social media in Réunion Island.",
+    "bio": "Holder of a Master's in Information & Communication Sciences (Communication, Culture & Media) from the University of Réunion. Creative, rigorous and curious, I support organisations with their communication and social-media content strategy — from CMA Réunion to EDF.",
     "photoAlt": "Profile picture of Meddy Gironcelle",
     "photoPlaceholder": "Photo to add"
   },
@@ -21,7 +21,8 @@
   },
   "stack": {
     "title": "Skills & tools",
-    "subtitle": "Communication, design and data"
+    "subtitle": "Communication, design and data",
+    "languages": "Languages"
   },
   "location": {
     "title": "Location",

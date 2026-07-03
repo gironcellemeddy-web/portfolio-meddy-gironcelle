@@ -5,8 +5,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { getProject, projectTitle, projects } from "@/lib/projects";
 import { ProjectDetailGallery } from "@/components/projects/ProjectDetailGallery";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -42,10 +40,7 @@ export default async function ProjectPage({ params }: Params) {
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           {t("back")}
         </Link>
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
+        <span className="font-display text-lg font-black tracking-tight">MG</span>
       </header>
 
       <div className="mb-8 border-b-[1.5px] border-card-border pb-6">

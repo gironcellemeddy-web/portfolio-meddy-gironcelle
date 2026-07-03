@@ -10,7 +10,7 @@
     "cv": "Télécharger mon CV",
     "role": "Communication & Marketing digital",
     "statusAvailable": "Disponible pour un poste",
-    "bio": "[À compléter] Courte bio à fournir. Étudiant / chargé de communication et marketing digital, spécialisé dans les stratégies de contenu et les réseaux sociaux à La Réunion.",
+    "bio": "Diplômé d'un Master 2 en Sciences de l'Information et de la Communication (Communication, Culture & Médias) à l'Université de La Réunion. Créatif, rigoureux et curieux, j'accompagne les organisations dans leur communication et leur stratégie de contenu sur les réseaux — de la CMA Réunion à EDF.",
     "photoAlt": "Photo de profil de Meddy Gironcelle",
     "photoPlaceholder": "Photo à ajouter"
   },
@@ -21,7 +21,8 @@
   },
   "stack": {
     "title": "Compétences & outils",
-    "subtitle": "Communication, création et data"
+    "subtitle": "Communication, création et data",
+    "languages": "Langues"
   },
   "location": {
     "title": "Localisation",

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { Download, MapPin } from "lucide-react";
 import { BentoCard } from "@/components/bento/BentoCard";
 
 // Carte profil (hero éditorial) : nom en serif géant, statut, bio, CV.
@@ -34,11 +34,12 @@ export function ProfileCard({ index }: { index?: number }) {
 
       <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
         <a
-          href="#"
+          href="/cv-meddy-gironcelle.pdf"
+          download
           className="group/cv inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90"
         >
           {t("cv")}
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover/cv:translate-x-0.5 group-hover/cv:-translate-y-0.5" />
+          <Download className="h-4 w-4" />
         </a>
         <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-card-border px-3 py-1.5 text-xs font-medium text-muted">
           <MapPin className="h-3.5 w-3.5" />

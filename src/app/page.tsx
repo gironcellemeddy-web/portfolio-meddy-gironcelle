@@ -4,8 +4,6 @@ import { ProfileCard } from "@/components/cards/ProfileCard";
 import { SocialCard } from "@/components/cards/SocialCard";
 import { StackCard } from "@/components/cards/StackCard";
 import { ProjectsCard } from "@/components/cards/ProjectsCard";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export default function Home() {
   const t = useTranslations("footer");
@@ -14,10 +12,9 @@ export default function Home() {
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-10">
       <header className="mb-8 flex items-center justify-between">
         <span className="font-display text-lg font-black tracking-tight">MG</span>
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
+        <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
+          Portfolio · 2026
+        </span>
       </header>
 
       <BentoGrid>
