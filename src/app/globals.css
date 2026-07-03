@@ -52,3 +52,25 @@ body {
   transition-property: background-color, border-color, color;
   transition-duration: 200ms;
 }
+
+/* Apparition des cartes en CSS pur : jouée par le navigateur, sans dépendre
+   du JS ni de l'hydratation. Le contenu reste donc visible en toutes
+   circonstances (état de repos = opacity:1). */
+@keyframes bento-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bento-card {
+  animation: bento-in 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-card {
+    animation: none;
+  }
+}
