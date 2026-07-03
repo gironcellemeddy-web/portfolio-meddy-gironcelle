@@ -18,7 +18,7 @@ export function ProjectsGallery() {
           <Link
             key={p.slug}
             href={`/realisations/${p.slug}`}
-            className="group/tile relative block break-inside-avoid overflow-hidden rounded-[var(--radius-bento)] border-[1.5px] border-card-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group/tile relative block break-inside-avoid overflow-hidden rounded-[var(--radius-bento)] border border-card-border transition-colors hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Image
               src={cover.src}

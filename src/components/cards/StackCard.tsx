@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { BentoCard } from "@/components/bento/BentoCard";
 
 // Compétences réelles issues du CV de Meddy.
-const skills: { name: string; level: string }[] = [
+const skills: { name: string; level: "Avancé" | "Intermédiaire" }[] = [
   { name: "Canva", level: "Avancé" },
   { name: "Réseaux sociaux", level: "Avancé" },
   { name: "Rédaction", level: "Avancé" },
@@ -27,10 +27,16 @@ export function StackCard({ index }: { index?: number }) {
         {skills.map((s) => (
           <li
             key={s.name}
-            className="flex items-center justify-between border-b-[1.5px] border-card-border/40 py-2"
+            className="flex items-center justify-between border-b border-card-border py-2"
           >
             <span className="text-sm font-semibold">{s.name}</span>
-            <span className="text-xs uppercase tracking-wide text-muted">{s.level}</span>
+            <span
+              className={`text-[11px] font-semibold uppercase tracking-wide ${
+                s.level === "Avancé" ? "text-accent-2" : "text-accent"
+              }`}
+            >
+              {s.level}
+            </span>
           </li>
         ))}
       </ul>
@@ -43,7 +49,7 @@ export function StackCard({ index }: { index?: number }) {
           {languages.map((l) => (
             <span
               key={l}
-              className="rounded-full border-[1.5px] border-card-border px-2.5 py-1 text-xs font-medium"
+              className="rounded-full border border-card-border px-2.5 py-1 text-xs font-medium transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
             >
               {l}
             </span>

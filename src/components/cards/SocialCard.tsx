@@ -34,14 +34,18 @@ export function SocialCard({ index }: { index?: number }) {
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group/soc flex items-center gap-3 border-b-[1.5px] border-card-border/40 pb-2.5 transition-colors hover:border-card-border"
+              className="group/soc flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-accent-soft"
             >
-              <c.Icon className="h-5 w-5 shrink-0" />
-              <span className="flex min-w-0 flex-1 items-baseline gap-2">
-                <span className="text-base font-semibold">{c.label}</span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-card-border text-foreground transition-colors group-hover/soc:border-accent group-hover/soc:text-accent">
+                <c.Icon className="h-4.5 w-4.5" />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col leading-tight">
+                <span className="text-sm font-semibold transition-colors group-hover/soc:text-accent">
+                  {c.label}
+                </span>
                 <span className="truncate text-xs text-muted">{c.handle}</span>
               </span>
-              <ArrowUpRight className="h-4 w-4 shrink-0 -translate-x-1 opacity-0 transition-all group-hover/soc:translate-x-0 group-hover/soc:opacity-100" />
+              <ArrowUpRight className="h-4 w-4 shrink-0 -translate-x-1 text-accent opacity-0 transition-all group-hover/soc:translate-x-0 group-hover/soc:opacity-100" />
             </a>
           </li>
         ))}

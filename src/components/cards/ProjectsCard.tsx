@@ -6,7 +6,7 @@ export function ProjectsCard({ index }: { index?: number }) {
   const t = useTranslations("projects");
 
   return (
-    <BentoCard index={index} className="md:col-span-4">
+    <BentoCard index={index} tilt={false} className="md:col-span-4">
       <div className="mb-5 flex items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
