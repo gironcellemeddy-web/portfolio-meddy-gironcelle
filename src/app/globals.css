@@ -95,20 +95,24 @@ body {
   color: transparent;
 }
 
-/* Reveal au scroll (piloté par IntersectionObserver → classe .is-in).
-   Transition CSS pure : fonctionne sans requestAnimationFrame. */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
+/* Entrée d'un léger décalage vertical UNIQUEMENT (jamais d'opacité, jamais de
+   clipping). Le contenu reste donc visible même si l'animation ne joue pas
+   (environnement qui fige les animations, JS absent, etc.). */
+@keyframes rise {
+  from { transform: translateY(16px); }
+  to { transform: translateY(0); }
 }
+.animate-fade-up {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+/* Reveal au scroll : VISIBLE par défaut. .is-in (IntersectionObserver) ne fait
+   que rejouer le léger décalage — aucune dépendance au JS pour la visibilité. */
+.reveal { opacity: 1; }
 .reveal.is-in {
-  opacity: 1;
-  transform: none;
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
 }
 
 /* Grain de film discret, au-dessus de tout, non interactif */
@@ -129,16 +133,13 @@ body::after {
 }
 .animate-floaty { animation: floaty 7s ease-in-out infinite; }
 
-/* Reveal de ligne par masque (typo hero). */
-.line-mask { overflow: hidden; display: block; }
+/* Lignes du titre hero : léger décalage, jamais de clipping (toujours visible). */
+.line-mask { display: block; }
 .line-inner {
   display: block;
-  transform: translateY(105%);
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--line-delay, 0ms);
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--line-delay, 0ms);
 }
-.is-in .line-inner,
-.line-mask.is-in .line-inner { transform: translateY(0); }
 
 /* Ancrage sous le header sticky */
 .anchor { scroll-margin-top: 6rem; }
@@ -148,13 +149,15 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .reveal,
+  .reveal.is-in,
+  .animate-fade-up,
+  .line-inner,
+  .animate-floaty {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
-  .line-inner { transform: none; transition: none; }
-  .animate-floaty { animation: none; }
   html { scroll-behavior: auto; }
   * {
     transition-duration: 0.01ms !important;

@@ -1,25 +1,18 @@
-"use client";
-
-import { useEffect, useState, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
 
-const EASE: CSSProperties = { transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)" };
+// Délai d'entrée (animation CSS). Le contenu est rendu côté serveur et VISIBLE
+// par défaut : aucune dépendance au JS pour l'affichage.
+const delay = (ms: number): CSSProperties => ({ "--enter-delay": `${ms}ms` } as CSSProperties);
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  // Classe d'entrée (opacité + translation), déclenchée au montage.
-  const anim = mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3";
-  const at = (delay: number): CSSProperties => ({ transitionDelay: `${delay}ms`, ...EASE });
-
   return (
     <section id="top" className="anchor relative mx-auto w-full max-w-6xl px-5 pt-32 pb-16 sm:pt-40 sm:pb-24">
       <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Colonne texte */}
-        <div className={mounted ? "is-in" : ""}>
-          <p className={`eyebrow mb-6 transition-all duration-700 ${anim}`} style={at(80)}>
+        <div>
+          <p className="eyebrow animate-fade-up mb-6" style={delay(80)}>
             Communication &amp; marketing digital — La Réunion
           </p>
 
@@ -39,17 +32,17 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className={`mt-7 max-w-xl text-lg leading-relaxed text-muted transition-all duration-700 sm:text-xl ${anim}`} style={at(360)}>
+          <p className="animate-fade-up mt-7 max-w-xl text-lg leading-relaxed text-muted sm:text-xl" style={delay(360)}>
             J&apos;imagine des <span className="font-medium text-ink">contenus</span> et des{" "}
             <span className="font-medium text-ink">stratégies de marque</span>{" "}
             qui captent l&apos;attention et installent la confiance.
           </p>
 
-          <p className={`mt-3 text-sm text-muted-2 transition-all duration-700 ${anim}`} style={at(440)}>
+          <p className="animate-fade-up mt-3 text-sm text-muted-2" style={delay(440)}>
             Master 2 Information–Communication · Expériences CMA Réunion &amp; EDF.
           </p>
 
-          <div className={`mt-9 flex flex-wrap items-center gap-3 transition-all duration-700 ${anim}`} style={at(540)}>
+          <div className="animate-fade-up mt-9 flex flex-wrap items-center gap-3" style={delay(540)}>
             <Magnetic strength={0.4}>
               <a
                 href="#travaux"
@@ -73,15 +66,15 @@ export function Hero() {
         </div>
 
         {/* Objet signature */}
-        <div className={`relative hidden justify-center transition-all duration-700 lg:flex ${anim}`} style={at(300)}>
+        <div className="animate-fade-up relative hidden justify-center lg:flex" style={delay(300)}>
           <SignatureOrb />
         </div>
       </div>
 
       <a
         href="#travaux"
-        className={`mt-20 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-2 transition-all duration-700 hover:text-ink ${anim}`}
-        style={at(700)}
+        className="animate-fade-up mt-20 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-2 transition-colors hover:text-ink"
+        style={delay(700)}
       >
         <ArrowDown className="h-4 w-4 animate-bounce" />
         Défiler
