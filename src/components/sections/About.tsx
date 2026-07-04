@@ -32,8 +32,9 @@ export function About() {
         <div>
           <Reveal delay={60}>
             <h2 className="font-display text-3xl font-semibold leading-[1.15] tracking-tight sm:text-[2.6rem]">
-              Diplômé d&apos;un <span className="text-ember">Master 2</span> en communication,
-              j&apos;aspire à accompagner les organisations dans leur stratégie de contenu.
+              Diplômé d&apos;un <span className="text-ember">Master&nbsp;2</span>{" "}
+              en communication, j&apos;aspire à accompagner les organisations dans leur
+              stratégie de contenu.
             </h2>
           </Reveal>
           <Reveal delay={140}>
