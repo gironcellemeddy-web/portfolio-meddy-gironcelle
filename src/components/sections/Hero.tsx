@@ -1,6 +1,9 @@
 import type { CSSProperties } from "react";
-import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowDown, ArrowUpRight, Camera, Download } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
+import { heroPhoto } from "@/lib/photos";
 
 // Délai d'entrée (animation CSS). Le contenu est rendu côté serveur et VISIBLE
 // par défaut : aucune dépendance au JS pour l'affichage.
@@ -9,7 +12,7 @@ const delay = (ms: number): CSSProperties => ({ "--enter-delay": `${ms}ms` } as 
 export function Hero() {
   return (
     <section id="top" className="anchor relative mx-auto w-full max-w-6xl px-5 pt-32 pb-16 sm:pt-40 sm:pb-24">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Colonne texte */}
         <div>
           <p className="eyebrow animate-fade-up mb-6" style={delay(80)}>
@@ -65,9 +68,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Objet signature */}
+        {/* Photo signature (une de mes photographies) */}
         <div className="animate-fade-up relative hidden justify-center lg:flex" style={delay(300)}>
-          <SignatureOrb />
+          <HeroPhoto />
         </div>
       </div>
 
@@ -83,47 +86,36 @@ export function Hero() {
   );
 }
 
-// Sphère de verre sculptée + anneau en orbite. Profondeur premium en CSS/SVG,
-// sans WebGL : léger, performant, dégradé naturel si les animations sont coupées.
-function SignatureOrb() {
+// Photographie mise en avant, encadrée avec profondeur, + accès à la galerie.
+function HeroPhoto() {
   return (
-    <div className="relative aspect-square w-full max-w-sm">
-      <div className="absolute inset-x-10 bottom-4 h-10 rounded-[100%] bg-ink/25 blur-2xl" />
+    <Link
+      href="/photographie"
+      className="group relative block w-full max-w-md overflow-hidden rounded-[var(--radius-xl2)] border border-line shadow-lift"
+      aria-label="Voir mes photographies"
+    >
+      <Image
+        src={heroPhoto.src}
+        alt="Photographie de paysage — Meddy Gironcelle"
+        width={heroPhoto.width}
+        height={heroPhoto.height}
+        priority
+        sizes="(max-width: 1024px) 0px, 40vw"
+        className="h-auto w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
 
-      <svg
-        className="absolute inset-[-10%] animate-[spin_30s_linear_infinite]"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <ellipse
-          cx="50"
-          cy="50"
-          rx="49"
-          ry="17"
-          stroke="var(--ink)"
-          strokeOpacity="0.14"
-          strokeWidth="0.5"
-          transform="rotate(-20 50 50)"
-        />
-      </svg>
+      <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-xs font-semibold">
+        <Camera className="h-3.5 w-3.5 text-ember" />
+        Ma photographie
+      </span>
 
-      <div
-        className="animate-floaty absolute inset-0 rounded-full shadow-lift"
-        style={{
-          background:
-            "radial-gradient(120% 120% at 32% 24%, #ffffff 0%, var(--ember-2) 20%, var(--ember) 50%, var(--cobalt) 108%)",
-        }}
-      >
-        <div className="absolute left-[16%] top-[12%] h-1/3 w-1/3 rounded-full bg-white/55 blur-2xl" />
-        <div className="absolute inset-4 rounded-full border border-white/20" />
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            boxShadow:
-              "inset 0 -34px 66px rgba(12,12,14,0.28), inset 0 22px 44px rgba(255,255,255,0.28)",
-          }}
-        />
-      </div>
-    </div>
+      <span className="absolute inset-x-4 bottom-4 flex items-center justify-between text-white">
+        <span className="text-sm font-semibold">Photographie de paysage</span>
+        <span className="inline-flex items-center gap-1 text-xs font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          Voir la galerie <ArrowUpRight className="h-3.5 w-3.5" />
+        </span>
+      </span>
+    </Link>
   );
 }

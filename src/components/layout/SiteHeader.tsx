@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Camera } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
 
-const NAV = [
+const ANCHORS = [
   { href: "#travaux", label: "Travaux" },
   { href: "#a-propos", label: "À propos" },
   { href: "#contact", label: "Contact" },
@@ -31,7 +33,7 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-1 sm:flex">
-          {NAV.map((n) => (
+          {ANCHORS.map((n) => (
             <a
               key={n.href}
               href={n.href}
@@ -40,20 +42,37 @@ export function SiteHeader() {
               {n.label}
             </a>
           ))}
+          <Link
+            href="/photographie"
+            className="inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-ink transition-colors hover:border-ember hover:text-ember"
+          >
+            <Camera className="h-3.5 w-3.5" />
+            Photographie
+          </Link>
         </nav>
 
-        <Magnetic strength={0.35}>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-ember"
+        <div className="flex items-center gap-2">
+          {/* Accès Photographie visible aussi sur mobile */}
+          <Link
+            href="/photographie"
+            aria-label="Photographie"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ember hover:text-ember sm:hidden"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            </span>
-            Disponible
-          </a>
-        </Magnetic>
+            <Camera className="h-4 w-4" />
+          </Link>
+          <Magnetic strength={0.35}>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-ember"
+            >
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
+              Disponible
+            </a>
+          </Magnetic>
+        </div>
       </div>
     </header>
   );
