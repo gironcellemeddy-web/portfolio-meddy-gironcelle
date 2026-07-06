@@ -18,7 +18,7 @@ export function Work() {
         <Reveal delay={140}>
           <p className="max-w-xs text-sm leading-relaxed text-muted">
             Carrousels, affiches, lignes éditoriales et publications conçus pour la CMA Réunion et
-            EDF. {projects.length} réalisations — cliquez pour ouvrir l&apos;étude complète.
+            EDF. {projects.length} réalisations — cliquez sur un projet pour voir plus.
           </p>
         </Reveal>
       </div>

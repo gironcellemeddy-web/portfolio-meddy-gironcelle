@@ -2,28 +2,26 @@
 
 import { useEffect, useRef } from "react";
 
-// Arrondi à 2 décimales : coordonnées identiques serveur/client (pas de mismatch
-// d'hydratation dû aux flottants de Math.cos/sin).
-const r2 = (n: number) => Math.round(n * 100) / 100;
+// Décor d'arrière-plan professionnel : halos « aurora » braise/cobalt, lignes
+// topographiques (clin d'œil au relief de La Réunion), objets 3D flottants
+// (anneau en perspective, panneau de verre). Chaque plan dérive en parallaxe
+// au scroll (écriture directe du transform, sans rAF). Les couleurs suivent
+// les variables CSS → s'adaptent automatiquement au mode sombre.
+// Désactivé si l'utilisateur réduit les animations.
 
-// Configuration des plans (ordre = ordre du DOM). `factor` = vitesse de dérive
-// au scroll ; `base` = transform statique (rotation/miroir des palmes).
 const LAYERS: { factor: number; base: string }[] = [
-  { factor: 0.14, base: "" }, // soleil
-  { factor: -0.12, base: "" }, // oiseaux
-  { factor: 0.3, base: "" }, // hibiscus
-  { factor: 0.22, base: "rotate(15deg)" }, // palme haut-gauche
-  { factor: -0.16, base: "" }, // vagues
-  { factor: -0.05, base: "" }, // relief arrière
-  { factor: -0.1, base: "" }, // relief avant
-  { factor: -0.24, base: "rotate(-20deg) scaleX(-1)" }, // palme bas-droite
+  { factor: 0.1, base: "" }, // aurora braise
+  { factor: -0.06, base: "" }, // aurora cobalt
+  { factor: -0.04, base: "" }, // topographie
+  { factor: 0.16, base: "rotateX(62deg)" }, // anneau 3D
+  { factor: 0.22, base: "perspective(900px) rotateY(-16deg) rotateX(7deg)" }, // panneau verre
+  { factor: 0.03, base: "" }, // grille fine
 ];
 
-// Décor d'arrière-plan évoquant l'île de La Réunion (relief volcanique, soleil,
-// océan, palmes, hibiscus, pailles-en-queue). Motifs SVG originaux, discrets,
-// derrière le contenu. Parallaxe au scroll : chaque plan dérive à une vitesse
-// différente (écriture directe du transform, sans rAF → fluide et robuste).
-// Désactivée si l'utilisateur réduit les animations.
+// Courbe organique fermée (base des anneaux topographiques).
+const CONTOUR =
+  "M100,18 C146,22 180,56 176,100 C172,146 138,182 96,179 C54,176 21,140 24,97 C27,56 56,14 100,18 Z";
+
 export function BackgroundDecor() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -56,114 +54,78 @@ export function BackgroundDecor() {
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Soleil (haut-droite) */}
-      <div ref={setRef(0)} className="absolute -right-16 -top-20 h-80 w-80 will-change-transform">
-        <svg className="h-full w-full text-ember" viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="52" fill="currentColor" opacity="0.1" />
-          <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.16">
-            {Array.from({ length: 12 }).map((_, i) => {
-              const a = (i * Math.PI) / 6;
-              return (
-                <line
-                  key={i}
-                  x1={r2(100 + Math.cos(a) * 66)}
-                  y1={r2(100 + Math.sin(a) * 66)}
-                  x2={r2(100 + Math.cos(a) * 82)}
-                  y2={r2(100 + Math.sin(a) * 82)}
-                />
-              );
-            })}
-          </g>
+      {/* Aurora braise (haut-droite) */}
+      <div
+        ref={setRef(0)}
+        className="absolute -right-40 -top-40 h-[36rem] w-[36rem] opacity-[0.13] blur-3xl will-change-transform dark:opacity-[0.17]"
+        style={{ background: "radial-gradient(circle, var(--ember) 0%, transparent 68%)" }}
+      />
+
+      {/* Aurora cobalt (gauche, mi-hauteur) */}
+      <div
+        ref={setRef(1)}
+        className="absolute -left-48 top-[32%] h-[32rem] w-[32rem] opacity-[0.1] blur-3xl will-change-transform dark:opacity-[0.15]"
+        style={{ background: "radial-gradient(circle, var(--cobalt) 0%, transparent 68%)" }}
+      />
+
+      {/* Lignes topographiques (bas-gauche) */}
+      <div ref={setRef(2)} className="absolute -bottom-40 -left-40 h-[44rem] w-[44rem] will-change-transform">
+        <svg className="h-full w-full text-ink opacity-[0.05] dark:opacity-[0.07]" viewBox="0 0 200 200" fill="none">
+          {[1, 0.84, 0.68, 0.52, 0.36, 0.2].map((s) => (
+            <path
+              key={s}
+              d={CONTOUR}
+              stroke="currentColor"
+              strokeWidth={0.7 / s}
+              transform={`translate(${100 - 100 * s} ${100 - 100 * s}) scale(${s})`}
+            />
+          ))}
         </svg>
       </div>
 
-      {/* Pailles-en-queue (oiseaux) */}
-      <div ref={setRef(1)} className="absolute left-[18%] top-[12%] h-24 w-48 will-change-transform">
-        <svg
-          className="h-full w-full text-ink opacity-[0.18]"
-          viewBox="0 0 200 80"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        >
-          <path d="M20 40 Q35 22 50 40 Q65 22 80 40" />
-          <path d="M110 26 Q122 12 134 26 Q146 12 158 26" />
-        </svg>
+      {/* Anneau 3D (droite, sous le hero) */}
+      <div ref={setRef(3)} className="absolute -right-16 top-[58%] h-64 w-64 will-change-transform">
+        <div className="animate-floaty h-full w-full">
+          <svg className="h-full w-full" viewBox="0 0 200 200" fill="none">
+            <defs>
+              <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="var(--ember)" />
+                <stop offset="100%" stopColor="var(--cobalt)" />
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="76" stroke="url(#ring-grad)" strokeWidth="17" opacity="0.35" />
+            <circle cx="100" cy="100" r="76" stroke="var(--ink)" strokeWidth="0.5" opacity="0.2" />
+          </svg>
+        </div>
       </div>
 
-      {/* Hibiscus (fleur) */}
-      <div ref={setRef(2)} className="absolute right-[10%] top-[42%] h-28 w-28 will-change-transform">
-        <svg className="h-full w-full text-ember opacity-[0.14]" viewBox="0 0 100 100">
-          <g fill="currentColor">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <ellipse key={i} cx="50" cy="28" rx="13" ry="22" transform={`rotate(${i * 72} 50 50)`} />
-            ))}
-          </g>
-          <circle cx="50" cy="50" r="8" fill="var(--cobalt)" opacity="0.6" />
-        </svg>
+      {/* Panneau de verre en perspective (gauche, bas de page) */}
+      <div ref={setRef(4)} className="absolute -left-6 top-[74%] h-48 w-36 will-change-transform">
+        <div
+          className="animate-floaty h-full w-full rounded-3xl border shadow-soft"
+          style={{
+            animationDelay: "1.6s",
+            borderColor: "var(--line)",
+            background:
+              "linear-gradient(150deg, color-mix(in srgb, var(--surface) 78%, transparent) 0%, color-mix(in srgb, var(--surface) 30%, transparent) 100%)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+          }}
+        />
       </div>
 
-      {/* Palme (haut-gauche) */}
-      <div ref={setRef(3)} className="absolute -left-10 top-2 h-56 w-56 will-change-transform">
-        <PalmCluster />
-      </div>
-
-      {/* Vagues (océan) */}
-      <div ref={setRef(4)} className="absolute bottom-[26%] left-0 h-28 w-full will-change-transform">
-        <svg
-          className="h-full w-full text-cobalt opacity-[0.14]"
-          viewBox="0 0 1440 120"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          preserveAspectRatio="none"
-        >
-          <path d="M0 30 Q120 10 240 30 T480 30 T720 30 T960 30 T1200 30 T1440 30" />
-          <path d="M0 70 Q120 50 240 70 T480 70 T720 70 T960 70 T1200 70 T1440 70" />
-          <path d="M0 110 Q120 90 240 110 T480 110 T720 110 T960 110 T1200 110 T1440 110" />
-        </svg>
-      </div>
-
-      {/* Relief volcanique — plan arrière */}
-      <div ref={setRef(5)} className="absolute bottom-0 left-0 h-[46vh] w-full will-change-transform">
-        <svg className="h-full w-full text-cobalt opacity-[0.07]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
-          <path d="M0 360 L0 210 L170 130 L320 195 L470 100 L610 180 L770 80 L910 170 L1080 120 L1240 195 L1440 140 L1440 360 Z" fill="currentColor" />
-        </svg>
-      </div>
-
-      {/* Relief volcanique — plan avant (pic central type Piton) */}
-      <div ref={setRef(6)} className="absolute bottom-0 left-0 h-[40vh] w-full will-change-transform">
-        <svg className="h-full w-full text-ink opacity-[0.06]" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
-          <path d="M0 360 L0 300 L180 255 L330 285 L470 205 L560 245 L660 150 L760 250 L900 215 L1060 280 L1220 235 L1440 295 L1440 360 Z" fill="currentColor" />
-        </svg>
-      </div>
-
-      {/* Palme (bas-droite) */}
-      <div ref={setRef(7)} className="absolute -right-8 bottom-14 h-64 w-64 will-change-transform">
-        <PalmCluster />
-      </div>
+      {/* Grille fine estompée (haut) */}
+      <div
+        ref={setRef(5)}
+        className="absolute inset-x-0 top-0 h-[42vh] opacity-[0.05] will-change-transform dark:opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+          maskImage: "radial-gradient(60% 100% at 70% 0%, #000 0%, transparent 78%)",
+          WebkitMaskImage: "radial-gradient(60% 100% at 70% 0%, #000 0%, transparent 78%)",
+        }}
+      />
     </div>
-  );
-}
-
-// Bouquet de palmes stylisées (fronde = tige courbe + folioles).
-function PalmCluster() {
-  return (
-    <svg className="h-full w-full text-[#1f5e4f] opacity-[0.1]" viewBox="0 0 200 200" fill="none">
-      <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        {[-55, -30, -8, 15, 40].map((deg, i) => (
-          <g key={i} transform={`rotate(${deg} 40 160)`}>
-            <path d="M40 160 Q90 120 150 128" />
-            {[0, 1, 2, 3, 4, 5].map((j) => {
-              const t = 0.2 + j * 0.13;
-              const x = r2(40 + (150 - 40) * t);
-              const y = r2(160 + (128 - 160) * t - Math.sin(t * Math.PI) * 20);
-              return <line key={j} x1={x} y1={y} x2={r2(x + 6)} y2={r2(y - 12)} strokeWidth="1.6" />;
-            })}
-          </g>
-        ))}
-      </g>
-    </svg>
   );
 }

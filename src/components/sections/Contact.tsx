@@ -68,11 +68,6 @@ export function Contact() {
           </div>
         </div>
       </Reveal>
-
-      <footer className="mt-8 flex flex-col items-center justify-between gap-2 text-xs text-muted-2 sm:flex-row">
-        <p>© {new Date().getFullYear()} Meddy Gironcelle</p>
-        <p>Communication &amp; Marketing digital · La Réunion</p>
-      </footer>
     </section>
   );
 }

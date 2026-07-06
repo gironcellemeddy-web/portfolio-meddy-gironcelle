@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Images, SlidersHorizontal, Smartphone } from "lucide-react";
 import { photos } from "@/lib/photos";
 import { PhotoGallery } from "@/components/photography/PhotoGallery";
 import { Reveal } from "@/components/ui/Reveal";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Photographie — Meddy Gironcelle",
@@ -22,9 +23,12 @@ export default function PhotographiePage() {
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           Retour au portfolio
         </Link>
-        <Link href="/" className="font-display text-base font-bold tracking-tight">
-          Meddy<span className="text-ember">.</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Link href="/" className="font-display text-base font-bold tracking-tight">
+            Meddy<span className="text-ember">.</span>
+          </Link>
+        </div>
       </header>
 
       {/* Intro */}
@@ -46,14 +50,14 @@ export default function PhotographiePage() {
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              📷 Samsung Galaxy S22 Ultra
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
+              <Smartphone className="h-3.5 w-3.5 text-ember" /> Samsung Galaxy S22 Ultra
             </span>
-            <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              🎛️ Adobe Lightroom
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
+              <SlidersHorizontal className="h-3.5 w-3.5 text-ember" /> Adobe Lightroom
             </span>
-            <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              {photos.length} clichés
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
+              <Images className="h-3.5 w-3.5 text-ember" /> {photos.length} clichés
             </span>
           </div>
         </Reveal>

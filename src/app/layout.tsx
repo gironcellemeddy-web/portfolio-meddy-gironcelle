@@ -41,7 +41,17 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Applique le thème sombre avant le premier rendu (anti-flash). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <BackgroundDecor />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>

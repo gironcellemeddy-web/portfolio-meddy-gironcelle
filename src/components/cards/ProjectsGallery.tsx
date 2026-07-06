@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import { ArrowUpRight, Layers } from "lucide-react";
 import { projects, projectCover, projectTitle } from "@/lib/projects";
 import { Reveal } from "@/components/ui/Reveal";
+import { Tilt } from "@/components/interactive/Tilt";
 
 // Grille éditoriale premium : chaque réalisation est un LIEN vers son étude
 // dédiée (/realisations/<slug>). Masonry (formats natifs), survol immersif.
@@ -16,9 +17,10 @@ export function ProjectsGallery() {
         const cover = projectCover(p);
         return (
           <Reveal key={p.slug} delay={(i % 2) * 90} className="break-inside-avoid">
+            <Tilt max={4}>
             <Link
               href={`/realisations/${p.slug}`}
-              className="group/card relative block overflow-hidden rounded-[var(--radius-xl2)] border border-line bg-surface shadow-soft transition-all duration-500 hover:-translate-y-1 hover:border-ink/20 hover:shadow-lift"
+              className="group/card relative block overflow-hidden rounded-[var(--radius-xl2)] border border-line bg-surface shadow-soft transition-all duration-500 hover:border-ink/20 hover:shadow-lift"
             >
               <div className="relative overflow-hidden">
                 <Image
@@ -38,8 +40,8 @@ export function ProjectsGallery() {
                   </span>
                 )}
                 {/* Appel à l'action révélé */}
-                <span className="absolute bottom-3 left-3 flex translate-y-2 items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-ink opacity-0 transition-all duration-500 group-hover/card:translate-y-0 group-hover/card:opacity-100">
-                  Voir l&apos;étude
+                <span className="absolute bottom-3 left-3 flex translate-y-2 items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-xs font-semibold text-ink opacity-0 transition-all duration-500 group-hover/card:translate-y-0 group-hover/card:opacity-100">
+                  Voir plus
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>
               </div>
@@ -56,6 +58,7 @@ export function ProjectsGallery() {
                 </span>
               </div>
             </Link>
+            </Tilt>
           </Reveal>
         );
       })}

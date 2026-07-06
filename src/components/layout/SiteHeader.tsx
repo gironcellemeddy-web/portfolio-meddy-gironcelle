@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Camera, Gamepad2 } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const ANCHORS = [
   { href: "#travaux", label: "Travaux" },
   { href: "#a-propos", label: "À propos" },
+  { href: "#jeu", label: "Arcade" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -49,17 +51,10 @@ export function SiteHeader() {
             <Camera className="h-3.5 w-3.5" />
             Photographie
           </Link>
-          <Link
-            href="/cv-interactif"
-            className="inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-ink transition-colors hover:border-ember hover:text-ember"
-          >
-            <Gamepad2 className="h-3.5 w-3.5" />
-            CV interactif
-          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Accès Photographie + CV interactif visibles aussi sur mobile */}
+          {/* Accès rapides mobiles */}
           <Link
             href="/photographie"
             aria-label="Photographie"
@@ -67,13 +62,14 @@ export function SiteHeader() {
           >
             <Camera className="h-4 w-4" />
           </Link>
-          <Link
-            href="/cv-interactif"
-            aria-label="CV interactif"
+          <a
+            href="#jeu"
+            aria-label="Arcade — mon parcours en jeu"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ember hover:text-ember sm:hidden"
           >
             <Gamepad2 className="h-4 w-4" />
-          </Link>
+          </a>
+          <ThemeToggle />
           <Magnetic strength={0.35}>
             <a
               href="#contact"

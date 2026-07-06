@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Camera, Download } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
+import { Tilt } from "@/components/interactive/Tilt";
 import { heroPhoto } from "@/lib/photos";
 
 // Délai d'entrée (animation CSS). Le contenu est rendu côté serveur et VISIBLE
@@ -68,9 +69,11 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Photo signature (une de mes photographies) */}
+        {/* Photo signature (une de mes photographies) — inclinaison 3D au survol */}
         <div className="animate-fade-up relative hidden justify-center lg:flex" style={delay(300)}>
-          <HeroPhoto />
+          <Tilt max={7} className="w-full max-w-md">
+            <HeroPhoto />
+          </Tilt>
         </div>
       </div>
 

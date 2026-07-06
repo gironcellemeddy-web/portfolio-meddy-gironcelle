@@ -135,15 +135,29 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     setPhase("ready");
   }, [resetPositions, setPhase]);
 
-  // --- Thème ---------------------------------------------------------
+  // --- Thème : localStorage → thème du site (.dark) → prefers-color-scheme
   useEffect(() => {
     let initial: "dark" | "light" = "dark";
     try {
       const stored = localStorage.getItem("pac-cv-theme");
       if (stored === "dark" || stored === "light") initial = stored;
-      else if (window.matchMedia("(prefers-color-scheme: light)").matches) initial = "light";
+      else if (document.documentElement.classList.contains("dark")) initial = "dark";
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches) initial = "dark";
+      else initial = "light";
     } catch {}
     setTheme(initial);
+  }, []);
+
+  // Visibilité du widget calculée à la volée (synchrone, fiable partout) :
+  // le clavier n'est capté que si au moins ~30% du jeu est à l'écran,
+  // sinon il volerait les flèches du reste de la page d'accueil.
+  const isOnScreen = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return false;
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || 0;
+    const overlap = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return overlap > Math.min(r.height, vh) * 0.3;
   }, []);
 
   useEffect(() => {
@@ -168,7 +182,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     };
     const onKey = (e: KeyboardEvent) => {
       const d = KEYS[e.key];
-      if (!d) return;
+      if (!d || !isOnScreen()) return;
       if (phaseRef.current === "ready" || phaseRef.current === "playing") {
         e.preventDefault();
         steer(d);
@@ -176,7 +190,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [steer]);
+  }, [steer, isOnScreen]);
 
   // Swipe tactile
   const touchStart = useRef<{ x: number; y: number } | null>(null);
