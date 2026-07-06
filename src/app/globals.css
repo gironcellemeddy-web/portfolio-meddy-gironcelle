@@ -148,6 +148,55 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ============================================================
+   PAC-CV — système dual theme scopé au widget (data-theme).
+   Jamais de valeurs pures (#000/#fff) ; contrastes WCAG AA.
+   ============================================================ */
+#pac-cv-widget-container[data-theme="dark"] {
+  --pac-bg: #16161a;
+  --pac-maze-bg: #121216;
+  --wall-glow-primary: #00d4ff;
+  --wall-glow-secondary: #7b2ff7;
+  --pac-text: #e8e8e8;
+  --pac-muted: #9a9aa4;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --pac-dim: rgba(10, 10, 14, 0.55);
+  --pac-avatar: #f4f4f2;
+  --pac-pellet: #9fd8ff;
+  --ghost-1: #ff3b5c;
+  --ghost-2: #ff6ec7;
+  --ghost-3: #ffa040;
+  --pac-glow-strength: 14;
+}
+#pac-cv-widget-container[data-theme="light"] {
+  --pac-bg: #f7f7f5;
+  --pac-maze-bg: #f1f0ec;
+  --wall-glow-primary: #ff9f43;
+  --wall-glow-secondary: #7ec8e3;
+  --pac-text: #2a2a2a;
+  --pac-muted: #6c6a63;
+  --glass-bg: rgba(30, 30, 30, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --pac-dim: rgba(250, 250, 248, 0.6);
+  --pac-avatar: #fdfdfa;
+  --pac-pellet: #7ea8c8;
+  --ghost-1: #e0607a;
+  --ghost-2: #d98fc0;
+  --ghost-3: #e0a06a;
+  --pac-glow-strength: 6;
+}
+#pac-cv-widget-container {
+  color: var(--pac-text);
+  background: var(--pac-bg);
+}
+#pac-cv-widget-container .pac-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal.is-in,
