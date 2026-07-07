@@ -1,6 +1,6 @@
-import { ArrowUpRight, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import { Magnetic } from "@/components/interactive/Magnetic";
+import { ContactButton } from "@/components/ui/ContactButton";
 import { InstagramIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 
 export function Contact() {
@@ -18,7 +18,7 @@ export function Contact() {
             style={{ background: "radial-gradient(circle, var(--cobalt) 0%, transparent 70%)" }}
           />
 
-          <p className="eyebrow mb-5 text-paper/60">/ 03 — Contact</p>
+          <p className="eyebrow mb-5 text-paper/60">/ 05 — Contact</p>
           <h2 className="font-display max-w-2xl text-4xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
             Un projet, un poste, une collaboration ?
           </h2>
@@ -27,22 +27,13 @@ export function Contact() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Magnetic strength={0.4}>
-              <a
-                href="mailto:gironcellemeddy@gmail.com"
-                className="inline-flex items-center gap-2 rounded-full bg-ember px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-ink"
-              >
-                gironcellemeddy@gmail.com
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </Magnetic>
+            <ContactButton />
             <a
               href="/cv-meddy-gironcelle.pdf"
               download
-              className="inline-flex items-center gap-2 rounded-full border border-paper/25 px-6 py-3 text-sm font-semibold text-paper transition-colors hover:border-paper"
+              className="font-display inline-flex items-center gap-2 rounded-full border-2 border-paper/40 px-8 py-3 text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-paper/10 sm:px-10 sm:py-3.5 sm:text-sm"
             >
-              Télécharger le CV
-              <Download className="h-4 w-4" />
+              Le CV <Download className="h-4 w-4" />
             </a>
           </div>
 

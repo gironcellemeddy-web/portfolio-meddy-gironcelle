@@ -39,14 +39,14 @@ export function SiteHeader() {
             <a
               key={n.href}
               href={n.href}
-              className="rounded-full px-3.5 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-ink/[0.04] hover:text-ink"
+              className="font-display whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium uppercase tracking-wider text-ink transition-opacity duration-200 hover:opacity-70"
             >
               {n.label}
             </a>
           ))}
           <Link
             href="/photographie"
-            className="inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-ink transition-colors hover:border-ember hover:text-ember"
+            className="font-display inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:border-ember hover:text-ember"
           >
             <Camera className="h-3.5 w-3.5" />
             Photographie

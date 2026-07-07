@@ -18,21 +18,49 @@
   color-scheme: light;
 }
 
-/* Mode sombre du site (classe .dark sur <html>, toggle manuel persisté). */
+/* Dégradé métallique des grands titres (adapté par thème). */
+:root {
+  --hgrad-1: #565b64;
+  --hgrad-2: #15171b;
+}
+
+/* Mode sombre (DÉFAUT — DA dark-first) : base #0C0C0C, texte bleuté #D7E2EA. */
 .dark {
-  --paper: #0e0e11;
-  --ink: #f0efeb;
-  --surface: #16161a;
-  --surface-2: #121216;
-  --line: #26262b;
-  --muted: #a19f98;
-  --muted-2: #6e6c66;
+  --paper: #0c0c0c;
+  --ink: #d7e2ea;
+  --surface: #141416;
+  --surface-2: #101013;
+  --line: #232329;
+  --muted: #98a1a9;
+  --muted-2: #666c73;
   --ember: #ff6a2b;
   --ember-2: #ff8a55;
   --ember-soft: #2a1a12;
   --cobalt: #6f8dff;
   --cobalt-soft: #161c33;
+  --hgrad-1: #646973;
+  --hgrad-2: #bbccd7;
   color-scheme: dark;
+}
+
+/* Titre en dégradé métallique (DA motion). */
+.hero-grad {
+  background: linear-gradient(180deg, var(--hgrad-1) 0%, var(--hgrad-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Bouton contact signature : dégradé violet→magenta→orange, lueur interne,
+   liseré blanc décalé. */
+.cta-grad {
+  background: linear-gradient(123deg, #18011f 7%, #b600a8 37%, #7621b0 72%, #be4c00 100%);
+  box-shadow:
+    0px 4px 4px rgba(181, 1, 167, 0.25),
+    4px 4px 12px #7721b1 inset;
+  outline: 2px solid rgba(255, 255, 255, 0.92);
+  outline-offset: -3px;
 }
 
 @theme inline {

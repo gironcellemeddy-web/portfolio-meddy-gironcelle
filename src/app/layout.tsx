@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { BackgroundDecor } from "@/components/decor/BackgroundDecor";
@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Grotesk moderne pour les grands titres.
-const spaceGrotesk = Space_Grotesk({
+// Kanit : typographie signature (titres géants, nav, boutons) — DA motion.
+const kanit = Kanit({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -40,15 +40,15 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${kanit.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
-        {/* Applique le thème sombre avant le premier rendu (anti-flash). */}
+        {/* Thème sombre PAR DÉFAUT (DA dark-first), clair si choisi — anti-flash. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();",
+              "(function(){try{if(localStorage.getItem('site-theme')!=='light')document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();",
           }}
         />
       </head>

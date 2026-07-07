@@ -2,7 +2,10 @@ import { Press_Start_2P } from "next/font/google";
 import { Download } from "lucide-react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
+import { Marquee } from "@/components/sections/Marquee";
 import { About } from "@/components/sections/About";
+import { Services } from "@/components/sections/Services";
+import { FeaturedStack } from "@/components/sections/FeaturedStack";
 import { Work } from "@/components/sections/Work";
 import { Contact } from "@/components/sections/Contact";
 import { PacCV } from "@/components/game/PacCV";
@@ -19,9 +22,12 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip">
         <Hero />
+        <Marquee />
         <About />
+        <Services />
+        <FeaturedStack />
         <Work />
         <Contact />
 
@@ -31,12 +37,15 @@ export default function Home() {
           className={`${pressStart.variable} anchor mx-auto w-full max-w-4xl px-5 pb-16 pt-8 sm:pt-12`}
         >
           <Reveal>
-            <p className="eyebrow mb-3">/ 04 — Bonus arcade</p>
+            <p className="eyebrow mb-3">/ 06 — Bonus arcade</p>
           </Reveal>
           <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
             <Reveal delay={60}>
-              <h2 className="font-display max-w-xl text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-                Mon parcours, <span className="text-gradient">version arcade</span>.
+              <h2
+                className="hero-grad font-display max-w-xl font-black uppercase leading-[1.02] tracking-tight"
+                style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)" }}
+              >
+                Mon parcours, version arcade
               </h2>
             </Reveal>
             <Reveal delay={140}>
@@ -59,7 +68,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-5 pb-8 text-xs text-muted-2 sm:flex-row">
+      <footer className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-5 pb-8 text-xs uppercase tracking-wider text-muted-2 sm:flex-row">
         <p>© {new Date().getFullYear()} Meddy Gironcelle</p>
         <p>Communication &amp; Marketing digital · La Réunion</p>
       </footer>
