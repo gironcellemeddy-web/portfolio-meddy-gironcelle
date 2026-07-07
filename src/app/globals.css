@@ -132,14 +132,6 @@ body {
     0 26px 50px -24px rgba(12, 12, 14, 0.28);
 }
 
-/* Texte en dégradé braise */
-.text-gradient {
-  background: linear-gradient(100deg, var(--ember) 0%, var(--ember-2) 60%, var(--ember) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* Entrée d'un léger décalage vertical UNIQUEMENT (jamais d'opacité, jamais de
    clipping). Le contenu reste donc visible même si l'animation ne joue pas
    (environnement qui fige les animations, JS absent, etc.). */

@@ -16,17 +16,46 @@ const geistMono = Geist_Mono({
 });
 
 // Kanit : typographie signature (titres géants, nav, boutons) — DA motion.
+// Poids limités à ceux réellement utilisés (perf).
 const kanit = Kanit({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "700", "900"],
 });
+
+const SITE_URL = "https://portfolio-meddy-gironcelle.vercel.app";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("meta");
+  const title = t("title");
+  const description = t("description");
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
+    alternates: { canonical: "/" },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "fr_FR",
+      url: "/",
+      siteName: "Meddy Gironcelle — Portfolio",
+      images: [
+        {
+          url: "/photos/photo-01.jpg",
+          width: 2000,
+          height: 1500,
+          alt: "Photographie de paysage — Meddy Gironcelle",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/photos/photo-01.jpg"],
+    },
   };
 }
 

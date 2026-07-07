@@ -17,24 +17,30 @@ export function Hero() {
       id="top"
       className="anchor relative flex h-svh min-h-[560px] flex-col justify-between overflow-x-clip px-5 pt-24 sm:px-8 md:px-10"
     >
-      {/* Nom géant, pleine largeur (déborde du padding de section) */}
+      {/* Nom géant, pleine largeur (déborde du padding de section).
+          Le dégradé est appliqué directement sur le span de texte (pas sur le
+          h1 parent) : le clip `background-clip:text` reste fiable partout. */}
       <div className="-mx-5 overflow-hidden sm:-mx-8 md:-mx-10">
         <h1
-          className="hero-grad font-display line-mask w-full whitespace-nowrap text-center font-black uppercase leading-none tracking-tight"
+          className="font-display line-mask w-full whitespace-nowrap text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: "clamp(2.4rem, 9vw, 10.5rem)" }}
         >
-          <span className="line-inner" style={{ "--line-delay": "120ms" } as CSSProperties}>
+          <span
+            className="line-inner hero-grad"
+            style={{ "--line-delay": "120ms" } as CSSProperties}
+          >
             Meddy Gironcelle
           </span>
         </h1>
       </div>
 
-      {/* Photo signature magnétique, ancrée en bas au centre */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center">
+      {/* Photo signature magnétique : centrée verticalement sur mobile
+          (aucun chevauchement avec l'accroche), ancrée en bas dès sm. */}
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center sm:top-auto sm:bottom-0 sm:translate-y-0">
         <Magnet padding={150} strength={3} className="pointer-events-auto">
           <Link href="/photographie" aria-label="Voir mes photographies" className="group block">
             <div
-              className="animate-fade-up relative w-[260px] overflow-hidden rounded-t-[28px] border border-line shadow-lift sm:w-[360px] md:w-[440px] lg:w-[500px]"
+              className="animate-fade-up relative w-[260px] overflow-hidden rounded-[28px] border border-line shadow-lift sm:w-[360px] sm:rounded-b-none md:w-[440px] lg:w-[500px]"
               style={delay(500)}
             >
               <Image
