@@ -2,8 +2,24 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { projects, projectCover } from "@/lib/projects";
 import { photos } from "@/lib/photos";
+
+// Visuels EXCLUSIFS au marquee (slides intérieures des carrousels et posts
+// jamais affichés ailleurs sur la page) : aucun doublon avec la grille des
+// réalisations, les cartes « À la une » ou le hero.
+const ROW1 = [
+  "/projets/carrousel-ia/2.png",
+  "/projets/carrousel-boulangerie/2.png",
+  "/projets/carrousel-maconnerie/2.png",
+  "/projets/carrousel-carrosserie/2.png",
+  "/projets/carrousel-coiffure/2.png",
+  "/projets/carrousel-ambulancier/2.png",
+  "/projets/carrousel-fleuriste/2.png",
+  "/projets/carrousel-poissonnerie/2.png",
+  "/projets/metisse/2.png",
+  "/projets/publications-facebook/2.png",
+  "/projets/bras-panon/1.png",
+];
 
 // Marquee piloté par le scroll : deux rangées d'images (réalisations puis
 // photographies) qui glissent horizontalement au fil du défilement — rangée 1
@@ -38,9 +54,10 @@ export function Marquee() {
     };
   }, []);
 
-  // Rangée 1 : couvertures des réalisations · rangée 2 : photographies.
-  const row1 = projects.map((p) => projectCover(p).src);
-  const row2 = photos.slice(0, 12).map((p) => p.src);
+  // Rangée 1 : slides exclusives · rangée 2 : photos non montrées ailleurs
+  // (le hero utilise photo-01, « À la une » photo-05/17/21).
+  const row1 = ROW1;
+  const row2 = photos.slice(23, 35).map((p) => p.src);
 
   return (
     <section ref={sectionRef} className="overflow-hidden pb-10 pt-24 sm:pt-32 md:pt-40">

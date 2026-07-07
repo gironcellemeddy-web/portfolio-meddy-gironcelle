@@ -1,7 +1,6 @@
 import { Download } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedText } from "@/components/ui/AnimatedText";
-import { ContactButton } from "@/components/ui/ContactButton";
 
 const BIO =
   "Diplômé d'un Master 2 en Sciences de l'Information et de la Communication à l'Université de La Réunion, je conçois des lignes éditoriales, des contenus et des campagnes qui donnent de la voix aux marques. Créatif, rigoureux et curieux, j'aspire à accompagner les organisations qui veulent se démarquer. Construisons quelque chose de mémorable ensemble !";
@@ -42,16 +41,13 @@ export function About() {
       </Reveal>
 
       <Reveal delay={140}>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <ContactButton />
-          <a
-            href="/cv-meddy-gironcelle.pdf"
-            download
-            className="font-display inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-3 text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink/10 sm:px-10 sm:py-3.5 sm:text-sm"
-          >
-            Le CV <Download className="h-4 w-4" />
-          </a>
-        </div>
+        <a
+          href="/cv-meddy-gironcelle.pdf"
+          download
+          className="font-display inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-3 text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink/10 sm:px-10 sm:py-3.5 sm:text-sm"
+        >
+          Télécharger le CV <Download className="h-4 w-4" />
+        </a>
       </Reveal>
     </section>
   );

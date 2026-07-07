@@ -1,28 +1,35 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 
-// Section services : fond inversé (encre sur papier / papier sur encre selon
-// le thème), coins supérieurs arrondis, liste numérotée façon éditoriale.
-// Contenus issus des compétences réelles du CV.
+// Section services : fond inversé (encre/papier selon le thème), coins
+// supérieurs arrondis, liste numérotée. Chaque service est adossé à une
+// preuve VISIBLE dans le portfolio et renvoie vers elle (cohérence
+// promesse ↔ démonstration).
 const SERVICES = [
-  {
-    name: "Stratégie éditoriale",
-    desc: "Lignes éditoriales, calendriers et positionnement : une parole de marque cohérente qui installe la confiance dans la durée.",
-  },
   {
     name: "Réseaux sociaux",
     desc: "Animation de communautés et formats natifs (Meta Business) : carrousels, stories et publications pensés pour l'engagement.",
+    proofLabel: "Voir les carrousels & publications",
+    href: "#travaux",
   },
   {
     name: "Création graphique",
-    desc: "Affiches, publications et supports print ou digitaux conçus sur Canva et Illustrator, toujours au service du message.",
+    desc: "Affiches, pages magazine et supports print ou digitaux conçus sur Canva et Illustrator, toujours au service du message.",
+    proofLabel: "Voir les affiches & pages magazine",
+    href: "#travaux",
   },
   {
-    name: "Rédaction",
-    desc: "Articles, posts et storytelling : des textes clairs, justes et incarnés, du brief à la publication.",
+    name: "Stratégie éditoriale",
+    desc: "Ligne éditoriale et planning digital 2026 conçus en stage pour la CMA Réunion : un cap clair, décliné en contenus.",
+    proofLabel: "Voir les contenus qui en découlent",
+    href: "#a-la-une",
   },
   {
-    name: "Photo & vidéo",
-    desc: "Prises de vue de paysage, retouche Lightroom et montages courts pour donner du relief aux contenus.",
+    name: "Photographie",
+    desc: "Prises de vue de paysage au Galaxy S22 Ultra et retouche Lightroom : un œil entraîné à cadrer, exposer et raconter.",
+    proofLabel: "Voir la galerie (36 clichés)",
+    href: "/photographie",
   },
 ];
 
@@ -67,6 +74,13 @@ export function Services() {
                 >
                   {s.desc}
                 </p>
+                <Link
+                  href={s.href}
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest underline decoration-current/30 underline-offset-4 transition-opacity hover:opacity-70 sm:text-sm"
+                >
+                  {s.proofLabel}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
             </div>
           </Reveal>

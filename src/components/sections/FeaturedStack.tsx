@@ -30,7 +30,7 @@ const CARDS = [
     cat: "Personnel · Passion",
     name: "Photographie de paysage",
     href: "/photographie",
-    imgs: ["/photos/photo-01.jpg", "/photos/photo-09.jpg"],
+    imgs: ["/photos/photo-17.jpg", "/photos/photo-21.jpg"],
     tall: "/photos/photo-05.jpg",
   },
 ];
