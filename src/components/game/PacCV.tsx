@@ -47,7 +47,17 @@ const ROWS = MAZE.length;
 const CELL = 26;
 const TICK_MS = 1000 / 50;
 const PLAYER_SPEED = 4.4; // cellules/s
-const GHOST_SPEED = 3.5;
+
+// Curseur de difficulté : vitesse des fantômes, probabilité de poursuite
+// (vs déplacement aléatoire) et nombre de vies.
+type DiffKey = "facile" | "normal" | "difficile" | "expert";
+const DIFFICULTIES: Record<DiffKey, { label: string; ghostSpeed: number; chase: number; lives: number }> = {
+  facile: { label: "FACILE", ghostSpeed: 2.7, chase: 0.5, lives: 4 },
+  normal: { label: "NORMAL", ghostSpeed: 3.5, chase: 0.7, lives: 3 },
+  difficile: { label: "DIFFICILE", ghostSpeed: 4.1, chase: 0.85, lives: 3 },
+  expert: { label: "EXPERT", ghostSpeed: 4.6, chase: 0.95, lives: 2 },
+};
+const DIFF_KEYS: DiffKey[] = ["facile", "normal", "difficile", "expert"];
 
 // Cases spéciales → contenu du CV. Diplômes (ordre narratif : bas = Bac,
 // gauche = Licence, droite = Master), qualités et expériences en ordre de
@@ -145,6 +155,8 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
   const invincibleRef = useRef(0);
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [diff, setDiff] = useState<DiffKey>("normal");
+  const diffRef = useRef(DIFFICULTIES.normal);
   const [phase, setPhaseState] = useState<Phase>("ready");
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -163,7 +175,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     for (let r = 0; r < ROWS; r++)
       for (let c = 0; c < COLS; c++)
         if (MAZE[r][c] === "G")
-          ghosts.push({ x: c, y: r, dir: [ghosts.length % 2 ? 1 : -1, 0], queued: null, speed: GHOST_SPEED });
+          ghosts.push({ x: c, y: r, dir: [ghosts.length % 2 ? 1 : -1, 0], queued: null, speed: diffRef.current.ghostSpeed });
     ghostsRef.current = ghosts;
     trailRef.current = [];
     invincibleRef.current = 60;
@@ -185,11 +197,33 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     itemsRef.current = items;
     resetPositions();
     setScore(0);
-    setLives(3);
+    setLives(diffRef.current.lives);
     setCollected({ diploma: 0, quality: 0, experience: 0 });
     setPopup(null);
     setPhase("ready");
   }, [resetPositions, setPhase]);
+
+  // Changement de difficulté : persiste le choix et relance une partie propre.
+  const changeDiff = useCallback(
+    (k: DiffKey) => {
+      diffRef.current = DIFFICULTIES[k];
+      setDiff(k);
+      try { localStorage.setItem("pac-cv-diff", k); } catch {}
+      resetGame();
+    },
+    [resetGame],
+  );
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("pac-cv-diff") as DiffKey | null;
+      if (stored && DIFFICULTIES[stored]) {
+        diffRef.current = DIFFICULTIES[stored];
+        setDiff(stored);
+        setLives(DIFFICULTIES[stored].lives);
+      }
+    } catch {}
+  }, []);
 
   // --- Thème : localStorage → thème du site (.dark) → prefers-color-scheme
   useEffect(() => {
@@ -296,7 +330,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         });
         if (opts.length === 0) {
           e.dir = e.dir ? [-e.dir[0], -e.dir[1]] as Vec : null;
-        } else if (Math.random() < 0.7) {
+        } else if (Math.random() < diffRef.current.chase) {
           opts.sort((a, b) =>
             (Math.abs(rx + a[0] - p.x) + Math.abs(ry + a[1] - p.y)) -
             (Math.abs(rx + b[0] - p.x) + Math.abs(ry + b[1] - p.y)));
@@ -532,7 +566,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         <div className={`${pixelFont} flex items-center gap-4 text-[9px] sm:text-[11px]`}>
           <span>SCORE {score}</span>
           <span aria-label={`${lives} vies`}>
-            {Array.from({ length: 3 }).map((_, i) => (
+            {Array.from({ length: DIFFICULTIES[diff].lives }).map((_, i) => (
               <span key={i} style={{ opacity: i < lives ? 1 : 0.18 }}>● </span>
             ))}
           </span>
@@ -577,15 +611,17 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
           style={{ touchAction: "none", aspectRatio: `${COLS}/${ROWS}` }}
         />
 
-        {/* Voile "prêt" */}
+        {/* Voile "prêt" : curseur de difficulté + lancement */}
         {phase === "ready" && (
-          <button
+          <div
             onClick={() => setPhase("playing")}
             className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center"
             style={{ background: "var(--pac-dim)" }}
           >
             <span className={`${pixelFont} text-xs sm:text-sm`} style={{ color: "var(--wall-glow-primary)" }}>
-              {lives < 3 ? "ENCORE " + lives + " VIE" + (lives > 1 ? "S" : "") : "PRÊT ?"}
+              {lives < DIFFICULTIES[diff].lives
+                ? "ENCORE " + lives + " VIE" + (lives > 1 ? "S" : "")
+                : "PRÊT ?"}
             </span>
             <span className="max-w-xs px-6 text-xs sm:text-sm" style={{ color: "var(--pac-text)" }}>
               Flèches / ZQSD ou glisse le doigt — collecte mes{" "}
@@ -593,10 +629,41 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
               <span style={{ color: "var(--pac-quality)" }}>◆ qualités</span> et{" "}
               <span style={{ color: "var(--pac-exp)" }}>◆ expériences</span>, et évite les fantômes.
             </span>
-            <span className={`${pixelFont} pac-glass rounded-full px-4 py-2 text-[9px] sm:text-[10px]`}>
+
+            {/* Curseur de difficulté (change = nouvelle partie) */}
+            <div
+              role="radiogroup"
+              aria-label="Niveau de difficulté"
+              className="flex flex-wrap items-center justify-center gap-1.5 px-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {DIFF_KEYS.map((k) => (
+                <button
+                  key={k}
+                  role="radio"
+                  aria-checked={diff === k}
+                  onClick={() => changeDiff(k)}
+                  className={`${pixelFont} rounded-full px-3 py-1.5 text-[8px] transition-opacity sm:text-[9px] ${
+                    diff === k ? "" : "pac-glass hover:opacity-75"
+                  }`}
+                  style={
+                    diff === k
+                      ? { background: "var(--wall-glow-primary)", color: "var(--pac-bg)" }
+                      : { color: "var(--pac-text)" }
+                  }
+                >
+                  {DIFFICULTIES[k].label}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setPhase("playing")}
+              className={`${pixelFont} pac-glass rounded-full px-4 py-2 text-[9px] transition-opacity hover:opacity-75 sm:text-[10px]`}
+            >
               APPUIE POUR JOUER
-            </span>
-          </button>
+            </button>
+          </div>
         )}
 
         {/* Pop-up de collecte (diplôme / qualité / expérience) */}
