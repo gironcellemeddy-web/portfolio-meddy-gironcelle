@@ -204,6 +204,8 @@ html {
   --ghost-1: #ff3b5c;
   --ghost-2: #ff6ec7;
   --ghost-3: #ffa040;
+  --pac-quality: #ffd23f;
+  --pac-exp: #ff4d5e;
   --pac-glow-strength: 14;
 }
 #pac-cv-widget-container[data-theme="light"] {
@@ -221,6 +223,8 @@ html {
   --ghost-1: #e0607a;
   --ghost-2: #d98fc0;
   --ghost-3: #e0a06a;
+  --pac-quality: #d9a921;
+  --pac-exp: #d1495b;
   --pac-glow-strength: 6;
 }
 #pac-cv-widget-container {

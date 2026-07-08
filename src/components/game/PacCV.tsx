@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  Briefcase,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -10,9 +11,10 @@ import {
   GraduationCap,
   Moon,
   RotateCcw,
+  Star,
   Sun,
 } from "lucide-react";
-import { milestones, type Milestone } from "@/lib/cvMilestones";
+import { milestones, qualities, experiences } from "@/lib/cvMilestones";
 
 /* ------------------------------------------------------------------
    PAC-CV — mini-jeu arcade : guide la sphère dans le labyrinthe,
@@ -21,20 +23,21 @@ import { milestones, type Milestone } from "@/lib/cvMilestones";
    dual theme via variables CSS scopées (voir globals.css).
    ------------------------------------------------------------------ */
 
-// Labyrinthe 19×15 : # mur · . pastille · D diplôme · G fantôme · P joueur
+// Labyrinthe 19×15 : # mur · . pastille · D diplôme (couleur primaire) ·
+// Q qualité (jaune) · E expérience pro (rouge) · G fantôme · P joueur
 const MAZE = [
   "###################",
-  "#........#........#",
+  "#Q.......#.......Q#",
   "#.##.###.#.###.##.#",
-  "#.................#",
+  "#........Q........#",
   "#.##.#.#####.#.##.#",
   "#....#...#...#....#",
   "####.### # ###.####",
   "#D  .#  GGG  #.  D#",
   "####.# ##### #.####",
-  "#....#.......#....#",
+  "#....#...E...#....#",
   "#.##.#.#####.#.##.#",
-  "#..#.....P.....#..#",
+  "#E.#.....P.....#.E#",
   "##.#.###.#.###.#.##",
   "#........D........#",
   "###################",
@@ -46,8 +49,51 @@ const TICK_MS = 1000 / 50;
 const PLAYER_SPEED = 4.4; // cellules/s
 const GHOST_SPEED = 3.5;
 
-// Diplômes associés aux cases D (ordre narratif : bas = Bac, gauche = Licence, droite = Master)
-const D_MAP: Record<string, number> = { "9,13": 0, "1,7": 1, "17,7": 2 };
+// Cases spéciales → contenu du CV. Diplômes (ordre narratif : bas = Bac,
+// gauche = Licence, droite = Master), qualités et expériences en ordre de
+// lecture du labyrinthe.
+type ItemKind = "diploma" | "quality" | "experience";
+const ITEM_MAP: Record<string, { kind: ItemKind; idx: number }> = {
+  "9,13": { kind: "diploma", idx: 0 },
+  "1,7": { kind: "diploma", idx: 1 },
+  "17,7": { kind: "diploma", idx: 2 },
+  "1,1": { kind: "quality", idx: 0 },
+  "17,1": { kind: "quality", idx: 1 },
+  "9,3": { kind: "quality", idx: 2 },
+  "9,9": { kind: "experience", idx: 0 },
+  "1,11": { kind: "experience", idx: 1 },
+  "17,11": { kind: "experience", idx: 2 },
+};
+
+// Contenu affiché dans le pop-up de collecte.
+type PopupData = {
+  kind: ItemKind;
+  cat: string;
+  title: string;
+  sub: string;
+  detail: string;
+  place?: string;
+};
+
+function popupFor(kind: ItemKind, idx: number): PopupData {
+  if (kind === "diploma") {
+    const m = milestones[idx];
+    return { kind, cat: "Diplôme", title: m.title, sub: m.years, detail: m.detail, place: m.place };
+  }
+  if (kind === "quality") {
+    const q = qualities[idx];
+    return { kind, cat: "Qualité", title: q.title, sub: "Ce qui me définit", detail: q.detail };
+  }
+  const e = experiences[idx];
+  return { kind, cat: "Expérience pro", title: e.title, sub: e.years, detail: e.detail, place: e.place };
+}
+
+// Couleur CSS var par famille (diplômes = couleur primaire initiale).
+const KIND_VAR: Record<ItemKind, string> = {
+  diploma: "--wall-glow-primary",
+  quality: "--pac-quality",
+  experience: "--pac-exp",
+};
 
 type Vec = [number, number];
 type Entity = { x: number; y: number; dir: Vec | null; queued: Vec | null; speed: number };
@@ -60,6 +106,7 @@ const walkable = (c: number, r: number) =>
 type Colors = {
   mazeBg: string; wallP: string; wallS: string; avatar: string;
   pellet: string; ghosts: string[]; glow: number;
+  quality: string; exp: string;
 };
 
 function readColors(el: HTMLElement): Colors {
@@ -73,8 +120,13 @@ function readColors(el: HTMLElement): Colors {
     pellet: v("--pac-pellet", "#9fd8ff"),
     ghosts: [v("--ghost-1", "#ff3b5c"), v("--ghost-2", "#ff6ec7"), v("--ghost-3", "#ffa040")],
     glow: Number(v("--pac-glow-strength", "12")) || 12,
+    quality: v("--pac-quality", "#ffd23f"),
+    exp: v("--pac-exp", "#ff4d5e"),
   };
 }
+
+const kindColor = (colors: Colors, kind: ItemKind) =>
+  kind === "diploma" ? colors.wallP : kind === "quality" ? colors.quality : colors.exp;
 
 export function PacCV({ pixelFont }: { pixelFont: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -86,7 +138,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
   const playerRef = useRef<Entity>({ x: 9, y: 11, dir: null, queued: null, speed: PLAYER_SPEED });
   const ghostsRef = useRef<Entity[]>([]);
   const pelletsRef = useRef<Set<string>>(new Set());
-  const diplomasRef = useRef<Set<string>>(new Set());
+  const itemsRef = useRef<Map<string, { kind: ItemKind; idx: number }>>(new Map());
   const trailRef = useRef<{ x: number; y: number }[]>([]);
   const phaseRef = useRef<Phase>("ready");
   const tickRef = useRef(0);
@@ -96,8 +148,8 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
   const [phase, setPhaseState] = useState<Phase>("ready");
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
-  const [popup, setPopup] = useState<Milestone | null>(null);
-  const [collected, setCollected] = useState(0);
+  const [popup, setPopup] = useState<PopupData | null>(null);
+  const [collected, setCollected] = useState({ diploma: 0, quality: 0, experience: 0 });
 
   const setPhase = useCallback((p: Phase) => {
     phaseRef.current = p;
@@ -119,18 +171,22 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
 
   const resetGame = useCallback(() => {
     const pellets = new Set<string>();
-    const diplomas = new Set<string>();
+    const items = new Map<string, { kind: ItemKind; idx: number }>();
     for (let r = 0; r < ROWS; r++)
       for (let c = 0; c < COLS; c++) {
-        if (MAZE[r][c] === ".") pellets.add(`${c},${r}`);
-        if (MAZE[r][c] === "D") diplomas.add(`${c},${r}`);
+        const ch = MAZE[r][c];
+        if (ch === ".") pellets.add(`${c},${r}`);
+        if (ch === "D" || ch === "Q" || ch === "E") {
+          const entry = ITEM_MAP[`${c},${r}`];
+          if (entry) items.set(`${c},${r}`, entry);
+        }
       }
     pelletsRef.current = pellets;
-    diplomasRef.current = diplomas;
+    itemsRef.current = items;
     resetPositions();
     setScore(0);
     setLives(3);
-    setCollected(0);
+    setCollected({ diploma: 0, quality: 0, experience: 0 });
     setPopup(null);
     setPhase("ready");
   }, [resetPositions, setPhase]);
@@ -343,15 +399,16 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         ctx.fill();
       });
 
-      // diplômes (pulsation)
+      // collectibles CV (losanges pulsants, couleur par famille)
       const pulse = 1 + 0.14 * Math.sin(tickRef.current / 9);
-      diplomasRef.current.forEach((key) => {
+      itemsRef.current.forEach(({ kind }, key) => {
         const [c, r] = key.split(",").map(Number);
         const px = (c + 0.5) * CELL, py = (r + 0.5) * CELL, s = CELL * 0.26 * pulse;
+        const col = kindColor(colors, kind);
         ctx.save();
-        ctx.shadowColor = colors.wallP;
+        ctx.shadowColor = col;
         ctx.shadowBlur = 10;
-        ctx.fillStyle = colors.wallP;
+        ctx.fillStyle = col;
         ctx.beginPath();
         ctx.moveTo(px, py - s); ctx.lineTo(px + s, py); ctx.lineTo(px, py + s); ctx.lineTo(px - s, py);
         ctx.closePath(); ctx.fill();
@@ -408,15 +465,16 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         // collecte
         const key = `${Math.round(p.x)},${Math.round(p.y)}`;
         if (pelletsRef.current.delete(key)) setScore((s) => s + 10);
-        if (diplomasRef.current.delete(key)) {
-          const idx = D_MAP[key] ?? 0;
+        const item = itemsRef.current.get(key);
+        if (item) {
+          itemsRef.current.delete(key);
           setScore((s) => s + 100);
-          setCollected((c) => c + 1);
-          setPopup(milestones[idx]);
+          setCollected((c) => ({ ...c, [item.kind]: c[item.kind] + 1 }));
+          setPopup(popupFor(item.kind, item.idx));
           setPhase("popup");
         }
         // victoire
-        if (pelletsRef.current.size === 0 && diplomasRef.current.size === 0 && phaseRef.current === "playing") {
+        if (pelletsRef.current.size === 0 && itemsRef.current.size === 0 && phaseRef.current === "playing") {
           setPhase("win");
         }
         // fantômes
@@ -452,7 +510,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
 
   const closePopup = () => {
     setPopup(null);
-    if (pelletsRef.current.size === 0 && diplomasRef.current.size === 0) setPhase("win");
+    if (pelletsRef.current.size === 0 && itemsRef.current.size === 0) setPhase("win");
     else setPhase("playing");
   };
 
@@ -478,7 +536,15 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
               <span key={i} style={{ opacity: i < lives ? 1 : 0.18 }}>● </span>
             ))}
           </span>
-          <span aria-label={`${collected} diplômes sur 3`}>🎓{collected}/3</span>
+          <span aria-label={`${collected.diploma} diplômes sur 3`} style={{ color: "var(--wall-glow-primary)" }}>
+            ◆{collected.diploma}/3
+          </span>
+          <span aria-label={`${collected.quality} qualités sur 3`} style={{ color: "var(--pac-quality)" }}>
+            ◆{collected.quality}/3
+          </span>
+          <span aria-label={`${collected.experience} expériences sur 3`} style={{ color: "var(--pac-exp)" }}>
+            ◆{collected.experience}/3
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -503,7 +569,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         <canvas
           ref={canvasRef}
           role="img"
-          aria-label="Labyrinthe Pac-CV : déplacez la sphère pour collecter les diplômes du parcours de Meddy"
+          aria-label="Labyrinthe Pac-CV : déplacez la sphère pour collecter les diplômes, qualités et expériences du parcours de Meddy"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           onClick={() => phaseRef.current === "ready" && setPhase("playing")}
@@ -522,7 +588,10 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
               {lives < 3 ? "ENCORE " + lives + " VIE" + (lives > 1 ? "S" : "") : "PRÊT ?"}
             </span>
             <span className="max-w-xs px-6 text-xs sm:text-sm" style={{ color: "var(--pac-text)" }}>
-              Flèches / ZQSD ou glisse le doigt — collecte les 3 diplômes 🎓 et évite les fantômes.
+              Flèches / ZQSD ou glisse le doigt — collecte mes{" "}
+              <span style={{ color: "var(--wall-glow-primary)" }}>◆ diplômes</span>,{" "}
+              <span style={{ color: "var(--pac-quality)" }}>◆ qualités</span> et{" "}
+              <span style={{ color: "var(--pac-exp)" }}>◆ expériences</span>, et évite les fantômes.
             </span>
             <span className={`${pixelFont} pac-glass rounded-full px-4 py-2 text-[9px] sm:text-[10px]`}>
               APPUIE POUR JOUER
@@ -530,7 +599,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
           </button>
         )}
 
-        {/* Pop-up diplôme */}
+        {/* Pop-up de collecte (diplôme / qualité / expérience) */}
         {phase === "popup" && popup && (
           <div className="absolute inset-0 flex items-center justify-center p-4" style={{ background: "var(--pac-dim)" }}>
             <div className="pac-glass w-full max-w-sm rounded-2xl p-6 text-center">
@@ -538,18 +607,28 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
                 className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full"
                 style={{ background: "var(--glass-bg)", border: "1px solid var(--glass-border)" }}
               >
-                <GraduationCap className="h-6 w-6" style={{ color: "var(--wall-glow-primary)" }} />
+                {popup.kind === "diploma" && (
+                  <GraduationCap className="h-6 w-6" style={{ color: `var(${KIND_VAR.diploma})` }} />
+                )}
+                {popup.kind === "quality" && (
+                  <Star className="h-6 w-6" style={{ color: `var(${KIND_VAR.quality})` }} />
+                )}
+                {popup.kind === "experience" && (
+                  <Briefcase className="h-6 w-6" style={{ color: `var(${KIND_VAR.experience})` }} />
+                )}
               </span>
-              <p className={`${pixelFont} text-[9px]`} style={{ color: "var(--wall-glow-primary)" }}>
-                DIPLÔME {collected}/3 · {popup.years}
+              <p className={`${pixelFont} text-[9px] uppercase`} style={{ color: `var(${KIND_VAR[popup.kind]})` }}>
+                {popup.cat} {collected[popup.kind]}/3 · {popup.sub}
               </p>
               <h3 className="mt-2 text-base font-bold leading-snug">{popup.title}</h3>
               <p className="mt-2 text-sm" style={{ color: "var(--pac-muted)" }}>{popup.detail}</p>
-              <p className="mt-1 text-xs" style={{ color: "var(--pac-muted)" }}>{popup.place}</p>
+              {popup.place && (
+                <p className="mt-1 text-xs" style={{ color: "var(--pac-muted)" }}>{popup.place}</p>
+              )}
               <button
                 onClick={closePopup}
                 className={`${pixelFont} mt-5 rounded-full px-5 py-2.5 text-[9px] transition-opacity hover:opacity-85`}
-                style={{ background: "var(--wall-glow-primary)", color: "var(--pac-bg)" }}
+                style={{ background: `var(${KIND_VAR[popup.kind]})`, color: "var(--pac-bg)" }}
               >
                 CONTINUER
               </button>
@@ -567,7 +646,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
               <p className={`${pixelFont} mt-3 text-[10px]`}>SCORE FINAL : {score}</p>
               <p className="mt-3 text-sm" style={{ color: "var(--pac-muted)" }}>
                 {phase === "win"
-                  ? "Bac, Licence, Master 2 : le parcours est à vous. La suite s'écrit ensemble ?"
+                  ? "Diplômes, qualités et expériences : vous connaissez mon CV par cœur. On en parle ?"
                   : "Les fantômes ont gagné cette fois… mais mon parcours reste consultable !"}
               </p>
               <div className="mt-5 flex flex-col items-center gap-2">

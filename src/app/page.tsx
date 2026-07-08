@@ -50,8 +50,8 @@ export default function Home() {
             </Reveal>
             <Reveal delay={140}>
               <p className="max-w-xs text-sm leading-relaxed text-muted">
-                Guidez la sphère, évitez les fantômes et collectez mes trois diplômes — chacun
-                dévoile une étape de ma formation. Pas le temps ?{" "}
+                Guidez la sphère, évitez les fantômes et collectez mes diplômes, qualités et
+                expériences pro — chaque losange dévoile un pan de mon CV. Pas le temps ?{" "}
                 <a
                   href="/cv-meddy-gironcelle.pdf"
                   download

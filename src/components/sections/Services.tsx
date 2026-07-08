@@ -20,12 +20,6 @@ const SERVICES = [
     href: "#travaux",
   },
   {
-    name: "Stratégie éditoriale",
-    desc: "Ligne éditoriale et planning digital 2026 conçus en stage pour la CMA Réunion : un cap clair, décliné en contenus.",
-    proofLabel: "Voir les contenus qui en découlent",
-    href: "#a-la-une",
-  },
-  {
     name: "Photographie",
     desc: "Prises de vue de paysage au Galaxy S22 Ultra et retouche Lightroom : un œil entraîné à cadrer, exposer et raconter.",
     proofLabel: "Voir la galerie (36 clichés)",
@@ -42,9 +36,9 @@ export function Services() {
       <Reveal>
         <h2
           className="font-display mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28"
-          style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+          style={{ fontSize: "clamp(2.6rem, 10.5vw, 150px)" }}
         >
-          Services
+          Savoir-faire
         </h2>
       </Reveal>
 

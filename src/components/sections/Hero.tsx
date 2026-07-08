@@ -1,13 +1,12 @@
 import type { CSSProperties } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { ArrowDown } from "lucide-react";
 import { Magnet } from "@/components/interactive/Magnet";
+import { PortfolioBook } from "@/components/interactive/PortfolioBook";
 import { ContactButton } from "@/components/ui/ContactButton";
-import { heroPhoto } from "@/lib/photos";
 
 // Hero façon motion : nom géant en dégradé métallique pleine largeur,
-// barre basse (accroche à gauche, bouton contact à droite), photo signature
-// magnétique en bas au centre. Contenu visible par défaut (animations qui ne
+// barre basse (accroche à gauche, bouton contact à droite), LIVRE PORTFOLIO
+// 3D feuilletable au centre. Contenu visible par défaut (animations qui ne
 // masquent jamais — léger décalage uniquement).
 const delay = (ms: number): CSSProperties => ({ "--enter-delay": `${ms}ms` } as CSSProperties);
 
@@ -15,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="anchor relative flex h-svh min-h-[560px] flex-col justify-between overflow-x-clip px-5 pt-24 sm:px-8 md:px-10"
+      className="anchor relative flex h-svh min-h-[640px] flex-col justify-between overflow-x-clip px-5 pt-24 sm:px-8 md:px-10"
     >
       {/* Nom géant, pleine largeur (déborde du padding de section).
           Le dégradé est appliqué directement sur le span de texte (pas sur le
@@ -34,30 +33,13 @@ export function Hero() {
         </h1>
       </div>
 
-      {/* Photo signature magnétique : centrée verticalement sur mobile
-          (aucun chevauchement avec l'accroche), ancrée en bas dès sm. */}
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center sm:top-auto sm:bottom-0 sm:translate-y-0">
+      {/* Livre portfolio 3D : centré verticalement sur mobile, posé plus bas
+          dès sm — magnétique et feuilletable au clic. */}
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center sm:top-auto sm:bottom-16 sm:translate-y-0">
         <Magnet padding={150} strength={3} className="pointer-events-auto">
-          <Link href="/photographie" aria-label="Voir mes photographies" className="group block">
-            <div
-              className="animate-fade-up relative w-[260px] overflow-hidden rounded-[28px] border border-line shadow-lift sm:w-[360px] sm:rounded-b-none md:w-[440px] lg:w-[500px]"
-              style={delay(500)}
-            >
-              <Image
-                src={heroPhoto.src}
-                alt="Photographie de paysage — Meddy Gironcelle"
-                width={heroPhoto.width}
-                height={heroPhoto.height}
-                priority
-                sizes="(max-width: 640px) 260px, (max-width: 1024px) 440px, 500px"
-                className="h-auto w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-              />
-              <span className="eyebrow absolute bottom-3 left-4 !text-white/80">
-                Ma photographie — voir plus
-              </span>
-              <span className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/55 to-transparent" />
-            </div>
-          </Link>
+          <div className="animate-fade-up" style={delay(500)}>
+            <PortfolioBook />
+          </div>
         </Magnet>
       </div>
 
@@ -73,6 +55,16 @@ export function Hero() {
           <ContactButton />
         </div>
       </div>
+
+      <a
+        href="#travaux"
+        className="animate-fade-up absolute bottom-7 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-2 transition-colors hover:text-ink lg:inline-flex"
+        style={delay(700)}
+      >
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+        Défiler
+      </a>
     </section>
   );
 }
+

@@ -9,6 +9,46 @@ export type Milestone = {
   place: string;
 };
 
+// Qualités (collectibles JAUNES du jeu) — issues du CV.
+export type Quality = { title: string; detail: string };
+export const qualities: Quality[] = [
+  {
+    title: "Curieux",
+    detail: "Toujours en veille : nouveaux formats, nouveaux outils, nouvelles idées.",
+  },
+  {
+    title: "Ponctuel",
+    detail: "Des délais tenus et des rendez-vous honorés — la base de la confiance.",
+  },
+  {
+    title: "Rigoureux",
+    detail: "Un travail soigné, relu et cohérent, du brief à la livraison.",
+  },
+];
+
+// Expériences professionnelles (collectibles ROUGES du jeu) — issues du CV.
+export type Experience = { title: string; years: string; detail: string; place: string };
+export const experiences: Experience[] = [
+  {
+    title: "Antenne Réunion / RTL Réunion",
+    years: "Stages · Rédaction",
+    detail: "Reportages terrain, interviews, montage audio, brèves et interventions à l'antenne.",
+    place: "Saint-Denis",
+  },
+  {
+    title: "CMA Réunion (CMAR)",
+    years: "Stage · Service communication",
+    detail: "Stratégie éditoriale réseaux sociaux, carrousels, affiches événementielles et publications.",
+    place: "Saint-Denis",
+  },
+  {
+    title: "EDF Réunion",
+    years: "Stage · Équipe communication",
+    detail: "Audit du réseau d'écrans dynamiques, projet Takamaka, plan de com mobilité électrique.",
+    place: "Saint-Denis",
+  },
+];
+
 export const milestones: Milestone[] = [
   {
     id: "bac",
