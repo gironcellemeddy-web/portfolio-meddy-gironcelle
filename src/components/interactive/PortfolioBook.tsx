@@ -11,7 +11,8 @@ import Image from "next/image";
 type Page =
   | { type: "cover" }
   | { type: "text"; label: string; title: string; lines: string[] }
-  | { type: "image"; src: string; label: string; caption: string };
+  | { type: "image"; src: string; label: string; caption: string }
+  | { type: "logos"; label: string; title: string; logos: { src: string; alt: string }[] };
 
 const PAGES: Page[] = [
   { type: "cover" },
@@ -33,6 +34,18 @@ const PAGES: Page[] = [
       "EDF Réunion — équipe communication",
       "CMA Réunion — service communication",
       "Antenne Réunion / RTL — rédaction",
+    ],
+  },
+  {
+    type: "logos",
+    label: "Ils m'ont fait confiance",
+    title: "Formation & stages",
+    logos: [
+      { src: "/logos/universite-reunion.png", alt: "Université de La Réunion" },
+      { src: "/logos/edf.png", alt: "EDF" },
+      { src: "/logos/cma-reunion.png", alt: "Chambre de Métiers et de l'Artisanat de La Réunion" },
+      { src: "/logos/antenne-reunion.png", alt: "Antenne Réunion" },
+      { src: "/logos/rtl-reunion.png", alt: "RTL Réunion" },
     ],
   },
   {
@@ -207,6 +220,30 @@ export function PortfolioBook() {
                         ))}
                       </ul>
                       <p className="font-display mt-auto text-right text-[10px] text-[#9a9388]">
+                        {i + 1} / {PAGES.length}
+                      </p>
+                    </div>
+                  )}
+
+                  {page.type === "logos" && (
+                    <div className="flex h-full flex-col p-5 pl-7 sm:p-6 sm:pl-8">
+                      <p className="font-display text-[10px] uppercase tracking-[0.25em] text-[#9a9388]">
+                        {page.label}
+                      </p>
+                      <p className="font-display mt-2 text-base font-black uppercase leading-tight text-[#1c1a16] sm:text-lg">
+                        {page.title}
+                      </p>
+                      <div className="mt-4 grid flex-1 grid-cols-2 items-center gap-x-3 gap-y-2">
+                        {page.logos.map((l, li) => (
+                          <div
+                            key={l.src}
+                            className={`relative h-10 sm:h-12 ${li === page.logos.length - 1 ? "col-span-2 h-12 sm:h-14" : ""}`}
+                          >
+                            <Image src={l.src} alt={l.alt} fill sizes="160px" className="object-contain" />
+                          </div>
+                        ))}
+                      </div>
+                      <p className="font-display mt-2 text-right text-[10px] text-[#9a9388]">
                         {i + 1} / {PAGES.length}
                       </p>
                     </div>
