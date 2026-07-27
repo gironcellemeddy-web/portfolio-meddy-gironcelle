@@ -13,8 +13,11 @@ import {
   RotateCcw,
   Star,
   Sun,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { milestones, qualities, experiences } from "@/lib/cvMilestones";
+import { GameAudio } from "@/lib/gameAudio";
 
 /* ------------------------------------------------------------------
    PAC-CV — mini-jeu arcade : guide la sphère dans le labyrinthe,
@@ -155,6 +158,8 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
   const invincibleRef = useRef(0);
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [muted, setMuted] = useState(false);
+  const audioRef = useRef<GameAudio | null>(null);
   const [diff, setDiff] = useState<DiffKey>("normal");
   const diffRef = useRef(DIFFICULTIES.normal);
   const [phase, setPhaseState] = useState<Phase>("ready");
@@ -163,9 +168,22 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
   const [popup, setPopup] = useState<PopupData | null>(null);
   const [collected, setCollected] = useState({ diploma: 0, quality: 0, experience: 0 });
 
+  // Change de phase et déclenche la bande-son correspondante.
   const setPhase = useCallback((p: Phase) => {
+    const prev = phaseRef.current;
     phaseRef.current = p;
     setPhaseState(p);
+
+    const a = audioRef.current;
+    if (!a) return;
+    if (p === "playing") {
+      if (prev === "ready") a.intro(); // lancement d'une manche
+      a.startSiren();
+    } else {
+      a.stopSiren();
+      if (p === "win") a.win();
+      if (p === "gameover") a.gameOver();
+    }
   }, []);
 
   // --- Init / reset -------------------------------------------------
@@ -213,6 +231,25 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
     },
     [resetGame],
   );
+
+  // Moteur audio (créé côté client ; le contexte s'ouvre au 1er clic).
+  useEffect(() => {
+    let m = false;
+    try { m = localStorage.getItem("pac-cv-muted") === "1"; } catch {}
+    setMuted(m);
+    audioRef.current = new GameAudio(m);
+    const a = audioRef.current;
+    return () => a.dispose();
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    setMuted((prev) => {
+      const next = !prev;
+      audioRef.current?.setMuted(next);
+      try { localStorage.setItem("pac-cv-muted", next ? "1" : "0"); } catch {}
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     try {
@@ -498,10 +535,14 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
 
         // collecte
         const key = `${Math.round(p.x)},${Math.round(p.y)}`;
-        if (pelletsRef.current.delete(key)) setScore((s) => s + 10);
+        if (pelletsRef.current.delete(key)) {
+          setScore((s) => s + 10);
+          audioRef.current?.pellet();
+        }
         const item = itemsRef.current.get(key);
         if (item) {
           itemsRef.current.delete(key);
+          audioRef.current?.collect(item.kind);
           setScore((s) => s + 100);
           setCollected((c) => ({ ...c, [item.kind]: c[item.kind] + 1 }));
           setPopup(popupFor(item.kind, item.idx));
@@ -515,6 +556,7 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
         if (invincibleRef.current <= 0) {
           for (const g of ghostsRef.current) {
             if (Math.abs(g.x - p.x) < 0.55 && Math.abs(g.y - p.y) < 0.55) {
+              audioRef.current?.death();
               setLives((l) => {
                 const left = l - 1;
                 if (left <= 0) setPhase("gameover");
@@ -581,6 +623,14 @@ export function PacCV({ pixelFont }: { pixelFont: string }) {
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={toggleMute}
+            aria-label={muted ? "Activer le son" : "Couper le son"}
+            aria-pressed={!muted}
+            className="pac-glass flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-75"
+          >
+            {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+          </button>
           <button
             onClick={themeToggle}
             aria-label={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
