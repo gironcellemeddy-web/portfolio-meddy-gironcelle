@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { photos } from "@/lib/photos";
 
 // Visuels EXCLUSIFS au marquee (slides intérieures des carrousels et posts
 // jamais affichés ailleurs sur la page) : aucun doublon avec la grille des
@@ -19,6 +18,20 @@ const ROW1 = [
   "/projets/metisse/2.png",
   "/projets/publications-facebook/2.png",
   "/projets/bras-panon/1.png",
+];
+
+// Rangée 2 : autres slides intérieures, jamais affichées ailleurs non plus.
+const ROW2 = [
+  "/projets/carrousel-ia/4.png",
+  "/projets/carrousel-boulangerie/4.png",
+  "/projets/carrousel-maconnerie/4.png",
+  "/projets/carrousel-carrosserie/4.png",
+  "/projets/carrousel-coiffure/4.png",
+  "/projets/carrousel-ambulancier/4.png",
+  "/projets/carrousel-fleuriste/4.png",
+  "/projets/carrousel-poissonnerie/4.png",
+  "/projets/carrousel-ia/6.png",
+  "/projets/carrousel-coiffure/6.png",
 ];
 
 // Marquee piloté par le scroll : deux rangées d'images (réalisations puis
@@ -54,10 +67,10 @@ export function Marquee() {
     };
   }, []);
 
-  // Rangée 1 : slides exclusives · rangée 2 : photos non montrées ailleurs
-  // (le hero utilise photo-01, « À la une » photo-05/17/21).
+  // Deux rangées de RÉALISATIONS uniquement (les photographies ont leur
+  // propre vitrine : la section « Mon île, mon regard »).
   const row1 = ROW1;
-  const row2 = photos.slice(23, 35).map((p) => p.src);
+  const row2 = ROW2;
 
   return (
     <section ref={sectionRef} className="overflow-hidden pb-10 pt-24 sm:pt-32 md:pt-40">

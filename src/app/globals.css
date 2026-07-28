@@ -163,6 +163,13 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Ken Burns : lent zoom/panoramique qui donne vie aux photographies. */
+@keyframes kenburns {
+  from { transform: scale(1.02) translate3d(0, 0, 0); }
+  to { transform: scale(1.16) translate3d(-1.5%, -1.5%, 0); }
+}
+.kenburns { animation: kenburns 9s ease-out both; }
+
 /* Flottement lent de l'objet signature (CSS → tourne sans rAF JS). */
 @keyframes floaty {
   0%, 100% { transform: translate3d(0, 0, 0); }
@@ -243,6 +250,7 @@ html {
   .reveal.is-in,
   .animate-fade-up,
   .line-inner,
+  .kenburns,
   .animate-floaty {
     animation: none !important;
     opacity: 1 !important;

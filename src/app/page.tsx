@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { Marquee } from "@/components/sections/Marquee";
+import { IslandShowcase } from "@/components/sections/IslandShowcase";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { FeaturedStack } from "@/components/sections/FeaturedStack";
@@ -28,6 +29,7 @@ export default function Home() {
         <TrustBar />
         <Marquee />
         <About />
+        <IslandShowcase />
         <Services />
         <FeaturedStack />
         <Work />
