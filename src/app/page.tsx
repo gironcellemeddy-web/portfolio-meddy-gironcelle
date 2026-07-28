@@ -2,6 +2,7 @@ import { Press_Start_2P } from "next/font/google";
 import { Download } from "lucide-react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
+import { TrustBar } from "@/components/sections/TrustBar";
 import { Marquee } from "@/components/sections/Marquee";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
@@ -24,6 +25,7 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1 overflow-x-clip">
         <Hero />
+        <TrustBar />
         <Marquee />
         <About />
         <Services />
