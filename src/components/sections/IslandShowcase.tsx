@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { photos } from "@/lib/photos";
+import { ISLAND_PATH, ISLAND_VIEWBOX, ISLAND_W, ISLAND_H } from "@/lib/islandShape";
 
 /* Relief 3D réel de La Réunion (MapLibre + tuiles d'élévation) en toile de
    fond, surmonté de la silhouette de l'île dans laquelle défilent mes
@@ -12,12 +13,9 @@ import { photos } from "@/lib/photos";
    MapLibre n'est chargé QUE lorsque la section approche de l'écran : le reste
    du site n'en supporte pas le poids. */
 
-// Silhouette stylisée de l'île, utilisée comme masque du cadre photo.
-const ISLAND =
-  "M108 10 C132 8 154 21 167 41 C177 56 188 63 186 81 C184 101 170 113 161 129 C151 149 131 167 107 169 C85 171 61 160 43 145 C28 131 14 113 12 90 C10 66 21 44 40 28 C58 14 86 12 108 10 Z";
-
+// Masque du cadre photo : contour géographique réel de l'île.
 const ISLAND_MASK = `url("data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180"><path d="${ISLAND}" fill="#fff"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${ISLAND_VIEWBOX}"><path d="${ISLAND_PATH}" fill="#fff"/></svg>`,
 )}")`;
 
 const SLIDE_MS = 4200;
@@ -137,6 +135,17 @@ export function IslandShowcase() {
       id="ile"
       className="anchor relative overflow-hidden py-20 sm:py-28"
     >
+      {/* Fond océan permanent : la section reste habitée même si les tuiles
+          d'élévation ne répondent pas. */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(90% 70% at 50% 45%, color-mix(in srgb, var(--cobalt) 22%, transparent) 0%, transparent 70%)",
+        }}
+      />
+
       {/* Relief réel en toile de fond */}
       <div
         ref={mapHostRef}
@@ -167,8 +176,9 @@ export function IslandShowcase() {
         {/* Cadre photo en forme d'île, incliné en 3D */}
         <div
           ref={frameRef}
-          className="relative aspect-[200/180] w-full max-w-[520px] transition-transform duration-500 ease-out"
-          style={{ transform: "perspective(1100px)" }}
+          className="relative w-full max-w-[520px] transition-transform duration-500 ease-out"
+          // Ratio exact de l'île : aucune déformation du contour.
+          style={{ transform: "perspective(1100px)", aspectRatio: `${ISLAND_W} / ${ISLAND_H}` }}
         >
           {/* Ombre portée sous l'île */}
           <div
@@ -210,9 +220,9 @@ export function IslandShowcase() {
           </div>
 
           {/* Liseré côtier lumineux */}
-          <svg viewBox="0 0 200 180" className="pointer-events-none absolute inset-0 h-full w-full">
+          <svg viewBox={ISLAND_VIEWBOX} className="pointer-events-none absolute inset-0 h-full w-full">
             <path
-              d={ISLAND}
+              d={ISLAND_PATH}
               fill="none"
               stroke="var(--ember)"
               strokeOpacity="0.85"
