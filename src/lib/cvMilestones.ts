@@ -30,22 +30,22 @@ export const qualities: Quality[] = [
 export type Experience = { title: string; years: string; detail: string; place: string };
 export const experiences: Experience[] = [
   {
-    title: "Antenne Réunion / RTL Réunion",
-    years: "Stages · Rédaction",
-    detail: "Reportages terrain, interviews, montage audio, brèves et interventions à l'antenne.",
-    place: "Saint-Denis",
+    title: "RTL Réunion",
+    years: "Déc. 2024 – Jan. 2025 · Rédaction",
+    detail: "Reportages terrain et interviews, montage audio (Audacity), rédaction de brèves et interventions en direct à l'antenne.",
+    place: "Saint-Denis · 6 semaines",
   },
   {
-    title: "CMA Réunion (CMAR)",
-    years: "Stage · Service communication",
-    detail: "Stratégie éditoriale réseaux sociaux, carrousels, affiches événementielles et publications.",
-    place: "Saint-Denis",
+    title: "Chambre de Métiers et de l'Artisanat",
+    years: "Avr. – Mai 2026 · Communication",
+    detail: "Stratégie éditoriale présentée devant la Commission Communication, carrousels et affiches (Canva), liste d'influenceurs et calendrier de tournage.",
+    place: "Saint-Denis · 6 semaines",
   },
   {
     title: "EDF Réunion",
-    years: "Stage · Équipe communication",
-    detail: "Audit du réseau d'écrans dynamiques, projet Takamaka, plan de com mobilité électrique.",
-    place: "Saint-Denis",
+    years: "Mai – Juin 2026 · Communication",
+    detail: "Audit du réseau d'écrans d'affichage dynamique, pilotage du projet stèle de Takamaka, plan de communication mobilité électrique.",
+    place: "Saint-Denis · 6 semaines",
   },
 ];
 
@@ -61,12 +61,12 @@ export const milestones: Milestone[] = [
     id: "licence",
     years: "2021 — 2024",
     title: "Licence Information-Communication",
-    detail: "Diplômé en décembre 2024 · Mention Bien",
+    detail: "Mention Bien",
     place: "Université de La Réunion — Saint-Denis",
   },
   {
     id: "master",
-    years: "2024 — 2026",
+    years: "2025 — 2026",
     title: "Master 2 Sciences de l'Information et de la Communication",
     detail: "Parcours Communication, Culture & Médias · Mention Bien",
     place: "Université de La Réunion — Saint-Denis",

@@ -3,9 +3,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 
 const BIO =
-  "Diplômé d'un Master 2 en Sciences de l'Information et de la Communication à l'Université de La Réunion, je conçois des lignes éditoriales, des contenus et des campagnes qui donnent de la voix aux marques. Créatif, rigoureux et curieux, j'aspire à accompagner les organisations qui veulent se démarquer. Construisons quelque chose de mémorable ensemble !";
+  "Diplômé d'un Master 2 en Sciences de l'Information et de la Communication à l'Université de La Réunion, je conçois des lignes éditoriales, des contenus et des campagnes qui donnent de la voix aux marques. Rigoureux et animé par une forte curiosité, je m'engage dans chaque mission avec adaptabilité et sens du collectif.";
 
-const CHIPS = ["Éditorial", "Réseaux sociaux", "Création de contenu", "Français · Créole · Anglais B1"];
+const CHIPS = [
+  "Éditorial",
+  "Réseaux sociaux",
+  "Création de contenu",
+  "Retouche photo",
+  "Français · Créole · Anglais B1",
+];
 
 export function About() {
   return (
