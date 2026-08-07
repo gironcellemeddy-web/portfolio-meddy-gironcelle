@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
 import { BackgroundDecor } from "@/components/decor/BackgroundDecor";
 import "./globals.css";
 
@@ -84,6 +85,10 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <BackgroundDecor />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {/* Mesure d'audience anonyme (sans cookie, conforme RGPD) :
+            visiteurs, visiteurs uniques, pages vues, pays, appareils.
+            Les données sont consultables sur vercel.com → onglet Analytics. */}
+        <Analytics />
       </body>
     </html>
   );
