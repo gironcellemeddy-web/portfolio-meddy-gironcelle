@@ -21,7 +21,7 @@ const SERVICES = [
   },
   {
     name: "Photographie",
-    desc: "Prises de vue de paysage au Galaxy S22 Ultra et retouche Lightroom : un œil entraîné à cadrer, exposer et raconter.",
+    desc: "Prises de vue de paysage à l'iPhone 17 Pro et retouche Lightroom : un œil entraîné à cadrer, exposer et raconter.",
     proofLabel: "Voir la galerie (36 clichés)",
     href: "/photographie",
   },

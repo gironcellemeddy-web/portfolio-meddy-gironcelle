@@ -1,5 +1,5 @@
-// Manifeste des photographies (paysages de Meddy Gironcelle, Galaxy S22 Ultra +
-// Lightroom). Images optimisées dans public/photos/photo-NN.jpg avec leurs
+// Manifeste des photographies (paysages de Meddy Gironcelle : iPhone 17 Pro
+// pour les plus récentes, Galaxy S22 Ultra auparavant, retouche Lightroom). Images optimisées dans public/photos/photo-NN.jpg avec leurs
 // dimensions réelles → cadres au format natif (masonry sans rognage).
 
 export type Photo = { src: string; width: number; height: number };
@@ -22,6 +22,8 @@ const DIMS: [number, number][] = [
   [1600, 2000], [1600, 2000], [2000, 1125], [2000, 1500], [2000, 1500],
   [2000, 2000], [2000, 2000], [2000, 1552], [2000, 1552], [2000, 1552],
   [2000, 1554], [2000, 1500], [2000, 1500], [2000, 1500], [2000, 1500],
+  // Série iPhone 17 Pro (72 → 74)
+  [1500, 2000], [1500, 2000], [1499, 2000],
 ];
 
 export const photos: Photo[] = DIMS.map(([width, height], i) => ({

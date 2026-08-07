@@ -45,13 +45,18 @@ export default function PhotographiePage() {
           <p className="mt-6 text-lg leading-relaxed text-muted sm:text-xl">
             Amateur et passionné de <span className="font-medium text-ink">photographie de
             paysage</span>. J&apos;en fais un véritable terrain d&apos;expérimentation :
-            cadrage, lumière, matière et retouche.
+            cadrage, lumière, matière et retouche. Mes clichés les plus récents sont
+            réalisés à l&apos;<span className="font-medium text-ink">iPhone 17 Pro</span>,
+            les précédents au Galaxy S22 Ultra — tous retouchés sous Lightroom.
           </p>
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-6 flex flex-wrap gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-ember/40 bg-ember-soft px-3.5 py-1.5 text-xs font-medium text-ember">
+              <Smartphone className="h-3.5 w-3.5" /> iPhone 17 Pro
+            </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              <Smartphone className="h-3.5 w-3.5 text-ember" /> Samsung Galaxy S22 Ultra
+              <Smartphone className="h-3.5 w-3.5" /> Galaxy S22 Ultra
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
               <SlidersHorizontal className="h-3.5 w-3.5 text-ember" /> Adobe Lightroom
