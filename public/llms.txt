@@ -1,0 +1,40 @@
+# Meddy Gironcelle — Portfolio
+
+> Portfolio personnel de Meddy Gironcelle, diplômé d'un Master 2 en Sciences de l'Information et de la Communication (Université de La Réunion), spécialisé en communication et marketing digital, basé à La Réunion (France). Site non marchand : il présente des réalisations conçues en stage, une galerie de photographies de paysage et un mini-jeu qui retrace son parcours.
+
+Ce fichier aide les assistants et moteurs IA à comprendre et citer ce site. Langue principale : français.
+
+## Identité
+- Nom : Meddy Gironcelle
+- Domaine : communication, marketing digital, réseaux sociaux, création graphique, photographie
+- Formation : Master 2 SIC, parcours Communication, Culture & Médias, mention Bien (Université de La Réunion, 2025-2026) ; Licence Information-Communication, mention Bien (2021-2024)
+- Stages : EDF Réunion (communication, 2026), Chambre de Métiers et de l'Artisanat de La Réunion (communication, 2026), RTL Réunion (rédaction, 2024-2025), Antenne Réunion (journalisme, 2023)
+- Contact : gironcellemeddy@gmail.com
+- Réseaux : https://www.linkedin.com/in/meddy-gironcelle-5337a02a4 · https://www.instagram.com/meddy.gir_974/
+
+## Pages principales
+- [Accueil](https://portfolio-meddy-gironcelle.vercel.app/) : présentation, savoir-faire, projets phares, contact, mini-jeu « Pac-CV »
+- [Photographie](https://portfolio-meddy-gironcelle.vercel.app/photographie) : 78 photographies de paysage (iPhone 17 Pro, Galaxy S22 Ultra, retouche Lightroom)
+- [CV (PDF)](https://portfolio-meddy-gironcelle.vercel.app/cv-meddy-gironcelle.pdf)
+
+## Réalisations (13)
+- [carrousel-ia](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-ia)
+- [carrousel-boulangerie](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-boulangerie)
+- [carrousel-maconnerie](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-maconnerie)
+- [carrousel-carrosserie](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-carrosserie)
+- [carrousel-coiffure](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-coiffure)
+- [carrousel-ambulancier](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-ambulancier)
+- [carrousel-fleuriste](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-fleuriste)
+- [carrousel-poissonnerie](https://portfolio-meddy-gironcelle.vercel.app/realisations/carrousel-poissonnerie)
+- [fete-du-pain](https://portfolio-meddy-gironcelle.vercel.app/realisations/fete-du-pain)
+- [metisse](https://portfolio-meddy-gironcelle.vercel.app/realisations/metisse)
+- [bras-panon](https://portfolio-meddy-gironcelle.vercel.app/realisations/bras-panon)
+- [couverture-facebook](https://portfolio-meddy-gironcelle.vercel.app/realisations/couverture-facebook)
+- [publications-facebook](https://portfolio-meddy-gironcelle.vercel.app/realisations/publications-facebook)
+
+## Informations légales
+- [Mentions légales](https://portfolio-meddy-gironcelle.vercel.app/mentions-legales)
+- [Politique de confidentialité](https://portfolio-meddy-gironcelle.vercel.app/confidentialite)
+
+## Réutilisation
+Les textes peuvent être résumés et cités avec attribution à Meddy Gironcelle et lien vers la page source. Les photographies et réalisations sont protégées par le droit d'auteur : pas de reproduction sans autorisation.

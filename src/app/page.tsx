@@ -12,6 +12,7 @@ import { Work } from "@/components/sections/Work";
 import { Contact } from "@/components/sections/Contact";
 import { PacCV } from "@/components/game/PacCV";
 import { Reveal } from "@/components/ui/Reveal";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 // Police pixel-art du mini-jeu (chargée avec la page d'accueil).
 const pressStart = Press_Start_2P({
@@ -20,9 +21,33 @@ const pressStart = Press_Start_2P({
   variable: "--font-pixel",
 });
 
+// Données structurées schema.org (Person) : permettent aux moteurs et aux
+// assistants IA d'identifier sans ambiguïté l'auteur du site.
+const PERSON_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Meddy Gironcelle",
+  url: "https://portfolio-meddy-gironcelle.vercel.app/",
+  email: "mailto:gironcellemeddy@gmail.com",
+  jobTitle: "Communication & marketing digital",
+  description:
+    "Diplômé d'un Master 2 en Sciences de l'Information et de la Communication (Université de La Réunion). Réseaux sociaux, création graphique, photographie de paysage.",
+  address: { "@type": "PostalAddress", addressRegion: "La Réunion", addressCountry: "FR" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Université de La Réunion" },
+  knowsLanguage: ["fr", "en"],
+  sameAs: [
+    "https://www.linkedin.com/in/meddy-gironcelle-5337a02a4",
+    "https://www.instagram.com/meddy.gir_974/",
+  ],
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSONLD) }}
+      />
       <SiteHeader />
       <main className="flex-1 overflow-x-clip">
         <Hero />
@@ -72,37 +97,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="mx-auto w-full max-w-6xl border-t border-line px-5 pb-8 pt-8">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-start">
-          <div>
-            <p className="font-display text-lg font-bold tracking-tight">
-              Meddy<span className="text-ember">.</span>
-            </p>
-            <p className="mt-1 text-xs uppercase tracking-wider text-muted-2">
-              Communication &amp; Marketing digital · La Réunion
-            </p>
-          </div>
-          <nav aria-label="Pied de page" className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs uppercase tracking-wider">
-            <a href="#travaux" className="text-muted transition-colors hover:text-ink">Travaux</a>
-            <a href="#a-propos" className="text-muted transition-colors hover:text-ink">À propos</a>
-            <a href="/photographie" className="text-muted transition-colors hover:text-ink">Photographie</a>
-            <a href="#jeu" className="text-muted transition-colors hover:text-ink">Arcade</a>
-            <a href="/cv-meddy-gironcelle.pdf" download className="text-muted transition-colors hover:text-ink">CV</a>
-          </nav>
-          <div className="flex flex-col items-center gap-1 text-xs text-muted-2 sm:items-end">
-            <a href="mailto:gironcellemeddy@gmail.com" className="transition-colors hover:text-ink">
-              gironcellemeddy@gmail.com
-            </a>
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/meddy.gir_974/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">Instagram</a>
-              <a href="https://www.linkedin.com/in/meddy-gironcelle-5337a02a4" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-        <p className="mt-6 text-center text-[11px] uppercase tracking-wider text-muted-2">
-          © {new Date().getFullYear()} Meddy Gironcelle — Tous droits réservés
-        </p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

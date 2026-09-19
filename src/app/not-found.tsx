@@ -1,15 +1,18 @@
 import Link from "next/link";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
+    <>
     <main className="flex min-h-svh flex-col items-center justify-center gap-6 px-5 text-center">
-      <p
+      <h1
         className="hero-grad font-display font-black uppercase leading-none tracking-tight"
         style={{ fontSize: "clamp(6rem, 24vw, 18rem)" }}
+        aria-label="Erreur 404 — page introuvable"
       >
         404
-      </p>
+      </h1>
       <p className="max-w-sm text-muted">
         Cette page n&apos;existe pas (ou plus). Le portfolio, lui, est bien là.
       </p>
@@ -21,5 +24,7 @@ export default function NotFound() {
         Retour à l&apos;accueil
       </Link>
     </main>
+      <SiteFooter />
+    </>
   );
 }

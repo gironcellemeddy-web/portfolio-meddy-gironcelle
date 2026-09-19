@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
-import { getProject, projectTitle, projects } from "@/lib/projects";
+import { getProject, projectTitle, projects, projectCover } from "@/lib/projects";
 import { ProjectDetailGallery } from "@/components/projects/ProjectDetailGallery";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
@@ -19,7 +20,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = getProject(slug);
   if (!p) return {};
   const locale = await getLocale();
-  return { title: `${projectTitle(p, locale)} — Meddy Gironcelle` };
+  const title = `${projectTitle(p, locale)} — Meddy Gironcelle`;
+  const cover = projectCover(p);
+  const description = `${p.type} conçu en stage par Meddy Gironcelle pour la CMA Réunion — ${p.images.length} visuel${p.images.length > 1 ? "s" : ""}.`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/realisations/${p.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `/realisations/${p.slug}`,
+      type: "article",
+      images: [{ url: cover.src, width: cover.width, height: cover.height, alt: projectTitle(p, locale) }],
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: Params) {
@@ -32,6 +47,7 @@ export default async function ProjectPage({ params }: Params) {
   const images = p.images;
 
   return (
+    <>
     <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-6 sm:px-6 sm:py-10">
       <header className="mb-10 flex items-center justify-between">
         <Link
@@ -58,5 +74,7 @@ export default async function ProjectPage({ params }: Params) {
 
       <ProjectDetailGallery images={images} title={projectTitle(p, locale)} />
     </main>
+      <SiteFooter />
+    </>
   );
 }

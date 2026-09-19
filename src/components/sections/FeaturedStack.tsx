@@ -114,6 +114,7 @@ export function FeaturedStack() {
                 </div>
                 <Link
                   href={c.href}
+                  aria-label={`Voir plus : ${c.name}`}
                   className="font-display rounded-full border-2 border-ink px-8 py-3 text-sm font-medium uppercase tracking-widest transition-colors hover:bg-ink/10 sm:px-10 sm:py-3.5 sm:text-base"
                 >
                   Voir plus

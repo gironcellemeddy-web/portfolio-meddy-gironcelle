@@ -94,6 +94,9 @@ export function IslandShowcase() {
               tileSize: 256,
               encoding: "terrarium",
               maxzoom: 15,
+              // Attribution exigée par la licence du jeu de données (AWS Open Data).
+              attribution:
+                'Relief : <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (Mapzen)',
             });
             m.setTerrain({ source: "terrain-reunion", exaggeration: 1.6 });
             m.addLayer({

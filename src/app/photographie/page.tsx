@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ArrowLeft, Images, SlidersHorizontal, Smartphone } from "lucide-react";
 import { photos } from "@/lib/photos";
 import { PhotoGallery } from "@/components/photography/PhotoGallery";
@@ -9,11 +10,20 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 export const metadata: Metadata = {
   title: "Photographie — Meddy Gironcelle",
   description:
-    "Photographie de paysage par Meddy Gironcelle : une passion et un terrain d'expérimentation, au Samsung Galaxy S22 Ultra et retouché sous Lightroom.",
+    "Photographie de paysage par Meddy Gironcelle : 78 clichés pris à l'iPhone 17 Pro et au Galaxy S22 Ultra, retouchés sous Lightroom.",
+  alternates: { canonical: "/photographie" },
+  openGraph: {
+    title: "Photographie — Meddy Gironcelle",
+    description: "78 photographies de paysage, iPhone 17 Pro & Galaxy S22 Ultra, retouche Lightroom.",
+    url: "/photographie",
+    type: "website",
+    images: [{ url: "/photos/photo-01.jpg", width: 2000, height: 1500, alt: "Photographie de paysage — Meddy Gironcelle" }],
+  },
 };
 
 export default function PhotographiePage() {
   return (
+    <>
     <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-6 sm:py-10">
       <header className="mb-12 flex items-center justify-between">
         <Link
@@ -70,9 +80,8 @@ export default function PhotographiePage() {
 
       <PhotoGallery photos={photos} />
 
-      <footer className="mt-16 flex flex-col items-center gap-1 text-center text-xs text-muted-2">
-        <p>© {new Date().getFullYear()} Meddy Gironcelle — toutes les photos sont les miennes.</p>
-      </footer>
     </main>
+      <SiteFooter />
+    </>
   );
 }
