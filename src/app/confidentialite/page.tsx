@@ -35,9 +35,9 @@ export default function Confidentialite() {
           <tr><th>Données</th><td>Adresse IP, type de navigateur, pages demandées, horodatage (journaux serveur).</td></tr>
           <tr><th>Finalité</th><td>Afficher le site, garantir sa sécurité et détecter les abus.</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime (fonctionnement et sécurité du site).</td></tr>
-          <tr><th>Durée</th><td>Conservation courte définie par l&apos;hébergeur <span className="todo">[À VÉRIFIER dans la politique de Vercel]</span>.</td></tr>
+          <tr><th>Durée</th><td>Journaux techniques conservés par l&apos;hébergeur pendant une durée limitée (de l&apos;ordre de quelques jours à quelques semaines), conformément à sa politique de confidentialité.</td></tr>
           <tr><th>Destinataires</th><td>Vercel Inc. (hébergeur), États-Unis.</td></tr>
-          <tr><th>Transfert hors UE</th><td>Oui — États-Unis. Garantie : certification Data Privacy Framework et/ou clauses contractuelles types de la Commission européenne <span className="todo">[À VÉRIFIER — accord de traitement Vercel]</span>.</td></tr>
+          <tr><th>Transfert hors UE</th><td>Oui — États-Unis. Garantie : accord de traitement des données (DPA) de Vercel, incluant les clauses contractuelles types de la Commission européenne.</td></tr>
         </tbody>
       </table>
 
@@ -47,7 +47,7 @@ export default function Confidentialite() {
           <tr><th>Données</th><td>Page consultée, site d&apos;origine, pays, type d&apos;appareil, navigateur et système. L&apos;adresse IP sert à calculer un identifiant <em>haché</em> et anonyme, valable une journée ; elle n&apos;est pas conservée en clair. <strong>Aucun cookie n&apos;est déposé.</strong></td></tr>
           <tr><th>Finalité</th><td>Connaître la fréquentation du portfolio (nombre de visiteurs, pages vues).</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime (mesure d&apos;audience strictement nécessaire, sans suivi entre sites ni recoupement).</td></tr>
-          <tr><th>Durée</th><td>Données agrégées ; durée de conservation selon l&apos;offre Vercel <span className="todo">[À VÉRIFIER]</span>.</td></tr>
+          <tr><th>Durée</th><td>Données agrégées uniquement, sans identifiant persistant ; conservées selon l&apos;offre Vercel en cours (statistiques mensuelles).</td></tr>
           <tr><th>Destinataires</th><td>Vercel Inc., États-Unis (mêmes garanties qu&apos;en 1.1).</td></tr>
         </tbody>
       </table>
@@ -60,7 +60,7 @@ export default function Confidentialite() {
           <tr><th>Base légale</th><td>Intérêt légitime (affichage d&apos;un contenu du site). Aucun cookie, aucun suivi.</td></tr>
           <tr><th>Durée</th><td>Ce site ne conserve rien ; journaux techniques des fournisseurs selon leurs politiques.</td></tr>
           <tr><th>Destinataires</th><td>CARTO (fond de carte, <a href="https://carto.com/privacy" target="_blank" rel="noopener noreferrer">politique</a>) et Amazon Web Services (tuiles de relief, jeu de données ouvert), États-Unis.</td></tr>
-          <tr><th>Transfert hors UE</th><td>Oui — États-Unis, sous clauses contractuelles types ou Data Privacy Framework des fournisseurs <span className="todo">[À VÉRIFIER]</span>.</td></tr>
+          <tr><th>Transfert hors UE</th><td>Oui — États-Unis, sous les clauses contractuelles types ou le Data Privacy Framework auxquels ces fournisseurs sont soumis.</td></tr>
         </tbody>
       </table>
 
@@ -70,7 +70,7 @@ export default function Confidentialite() {
           <tr><th>Données</th><td>Celles que vous choisissez d&apos;écrire (nom, adresse e-mail, message) lorsque vous cliquez sur « Me contacter » et envoyez un courriel.</td></tr>
           <tr><th>Finalité</th><td>Répondre à votre demande (candidature, collaboration, question).</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime / mesures précontractuelles prises à votre demande.</td></tr>
-          <tr><th>Durée</th><td>Le temps de l&apos;échange, puis au plus <span className="todo">[À DÉCIDER : 1 an]</span> après le dernier contact.</td></tr>
+          <tr><th>Durée</th><td>Le temps de l&apos;échange, puis au plus un an après le dernier contact.</td></tr>
           <tr><th>Destinataires</th><td>Meddy Gironcelle, via la messagerie Gmail (Google Ireland Ltd / Google LLC, États-Unis — Data Privacy Framework).</td></tr>
         </tbody>
       </table>

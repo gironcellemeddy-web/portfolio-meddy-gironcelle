@@ -41,15 +41,14 @@ export default function MentionsLegales() {
           <strong>Vercel Inc.</strong>
         </li>
         <li>
-          440 N Barranca Ave #4133, Covina, CA 91723, États-Unis{" "}
-          <span className="todo">[À VÉRIFIER sur vercel.com/legal]</span>
+          440 N Barranca Ave #4133, Covina, CA 91723, États-Unis
         </li>
         <li>
           Site : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">vercel.com</a>{" "}
           · Contact : <a href="mailto:privacy@vercel.com">privacy@vercel.com</a>
         </li>
         <li>
-          Téléphone : <span className="todo">[À COMPLÉTER — Vercel ne publie pas de numéro public]</span>
+          Téléphone : non communiqué par l&apos;hébergeur — contact par courriel ci-dessus
         </li>
       </ul>
 
