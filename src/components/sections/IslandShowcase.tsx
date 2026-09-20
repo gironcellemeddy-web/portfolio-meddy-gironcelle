@@ -70,9 +70,11 @@ export function IslandShowcase() {
           if (cancelled) return;
 
           const dark = document.documentElement.classList.contains("dark");
+          // OpenFreeMap : fond de carte libre, sans clé API, sans journalisation
+          // des adresses IP (préféré à CARTO, qui exige désormais une clé).
           const style = dark
-            ? "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
-            : "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+            ? "https://tiles.openfreemap.org/styles/dark"
+            : "https://tiles.openfreemap.org/styles/positron";
 
           const m = new maplibregl.Map({
             container: host,
@@ -94,9 +96,10 @@ export function IslandShowcase() {
               tileSize: 256,
               encoding: "terrarium",
               maxzoom: 15,
-              // Attribution exigée par la licence du jeu de données (AWS Open Data).
+              // Attribution exigée par la licence (Mapzen Terrain Tiles ; source
+              // SRTM pour La Réunion, U.S. Geological Survey).
               attribution:
-                'Relief : <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Terrain Tiles</a> (Mapzen)',
+                'Relief : <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Mapzen Terrain Tiles</a> · SRTM (U.S. Geological Survey)',
             });
             m.setTerrain({ source: "terrain-reunion", exaggeration: 1.6 });
             m.addLayer({

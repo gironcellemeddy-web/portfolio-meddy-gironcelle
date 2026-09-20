@@ -84,9 +84,10 @@ export default function MentionsLegales() {
           <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
             contributeurs OpenStreetMap
           </a>{" "}
-          · fond de carte ©{" "}
-          <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>{" "}
-          · relief : Terrain Tiles (Mapzen / AWS Open Data).
+          · fond de carte{" "}
+          <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer">OpenFreeMap</a> ©{" "}
+          <a href="https://openmaptiles.org/" target="_blank" rel="noopener noreferrer">OpenMapTiles</a>{" "}
+          · relief : Mapzen Terrain Tiles, données SRTM (U.S. Geological Survey).
         </li>
         <li>Contour géographique de l&apos;île : données ouvertes IGN / OpenStreetMap (licence ODbL).</li>
       </ul>

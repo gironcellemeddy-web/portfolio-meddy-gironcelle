@@ -35,7 +35,7 @@ export default function Confidentialite() {
           <tr><th>Données</th><td>Adresse IP, type de navigateur, pages demandées, horodatage (journaux serveur).</td></tr>
           <tr><th>Finalité</th><td>Afficher le site, garantir sa sécurité et détecter les abus.</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime (fonctionnement et sécurité du site).</td></tr>
-          <tr><th>Durée</th><td>Journaux techniques conservés par l&apos;hébergeur pendant une durée limitée (de l&apos;ordre de quelques jours à quelques semaines), conformément à sa politique de confidentialité.</td></tr>
+          <tr><th>Durée</th><td>Journaux techniques conservés par l&apos;hébergeur pour une durée limitée, conformément à sa <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">politique de confidentialité</a> ; ce site n&apos;y a pas accès et n&apos;en conserve aucune copie.</td></tr>
           <tr><th>Destinataires</th><td>Vercel Inc. (hébergeur), États-Unis.</td></tr>
           <tr><th>Transfert hors UE</th><td>Oui — États-Unis. Garantie : accord de traitement des données (DPA) de Vercel, incluant les clauses contractuelles types de la Commission européenne.</td></tr>
         </tbody>
@@ -44,10 +44,10 @@ export default function Confidentialite() {
       <h3>1.2 Mesure d&apos;audience (Vercel Web Analytics)</h3>
       <table>
         <tbody>
-          <tr><th>Données</th><td>Page consultée, site d&apos;origine, pays, type d&apos;appareil, navigateur et système. L&apos;adresse IP sert à calculer un identifiant <em>haché</em> et anonyme, valable une journée ; elle n&apos;est pas conservée en clair. <strong>Aucun cookie n&apos;est déposé.</strong></td></tr>
+          <tr><th>Données</th><td>Page consultée, site d&apos;origine, localisation approximative (pays, région, ville), type d&apos;appareil, navigateur et système. L&apos;adresse IP sert à calculer un identifiant <em>haché</em> et anonyme, valable une journée ; elle n&apos;est pas conservée en clair. <strong>Aucun cookie n&apos;est déposé.</strong></td></tr>
           <tr><th>Finalité</th><td>Connaître la fréquentation du portfolio (nombre de visiteurs, pages vues).</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime (mesure d&apos;audience strictement nécessaire, sans suivi entre sites ni recoupement).</td></tr>
-          <tr><th>Durée</th><td>Données agrégées uniquement, sans identifiant persistant ; conservées selon l&apos;offre Vercel en cours (statistiques mensuelles).</td></tr>
+          <tr><th>Durée</th><td>Données agrégées uniquement, sans identifiant persistant ; l&apos;identifiant de session haché est supprimé après 24 heures ; statistiques consultables sur une fenêtre glissante d&apos;un mois (offre Hobby, 50 000 événements par mois).</td></tr>
           <tr><th>Destinataires</th><td>Vercel Inc., États-Unis (mêmes garanties qu&apos;en 1.1).</td></tr>
         </tbody>
       </table>
@@ -58,9 +58,9 @@ export default function Confidentialite() {
           <tr><th>Données</th><td>Adresse IP et type de navigateur, transmis lorsque votre navigateur télécharge les tuiles de la carte (uniquement quand vous atteignez la section « Mon île, mon regard »).</td></tr>
           <tr><th>Finalité</th><td>Afficher le relief de l&apos;île en arrière-plan.</td></tr>
           <tr><th>Base légale</th><td>Intérêt légitime (affichage d&apos;un contenu du site). Aucun cookie, aucun suivi.</td></tr>
-          <tr><th>Durée</th><td>Ce site ne conserve rien ; journaux techniques des fournisseurs selon leurs politiques.</td></tr>
-          <tr><th>Destinataires</th><td>CARTO (fond de carte, <a href="https://carto.com/privacy" target="_blank" rel="noopener noreferrer">politique</a>) et Amazon Web Services (tuiles de relief, jeu de données ouvert), États-Unis.</td></tr>
-          <tr><th>Transfert hors UE</th><td>Oui — États-Unis, sous les clauses contractuelles types ou le Data Privacy Framework auxquels ces fournisseurs sont soumis.</td></tr>
+          <tr><th>Durée</th><td>Ce site ne conserve rien. OpenFreeMap ne journalise pas les adresses IP (sauf incident de sécurité, 30 jours maximum) ; AWS conserve ses journaux techniques selon sa politique.</td></tr>
+          <tr><th>Destinataires</th><td><a href="https://openfreemap.org/privacy/" target="_blank" rel="noopener noreferrer">OpenFreeMap</a> (fond de carte libre, sans cookie ni journalisation d&apos;IP) et Amazon Web Services (tuiles de relief, jeu de données ouvert « Terrain Tiles »), États-Unis.</td></tr>
+          <tr><th>Transfert hors UE</th><td>Pour les tuiles de relief uniquement (AWS, États-Unis) : transfert couvert par la certification Data Privacy Framework et les clauses contractuelles types d&apos;Amazon Web Services. Le fond de carte OpenFreeMap n&apos;enregistre aucune donnée personnelle.</td></tr>
         </tbody>
       </table>
 
