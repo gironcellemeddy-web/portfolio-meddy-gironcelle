@@ -10,6 +10,17 @@ const HeroGradient = dynamic(
   { ssr: false },
 );
 
+const LiquidName = dynamic(
+  () => import("@/components/effects/LiquidName").then((m) => m.LiquidName),
+  { ssr: false },
+);
+
+/** Fond dégradé animé, en arrière-plan de la section. */
 export function HeroEffects() {
   return <HeroGradient />;
+}
+
+/** Métal liquide, superposé au titre (qui reste dans la page). */
+export function LiquidNameEffect({ text }: { text: string }) {
+  return <LiquidName text={text} />;
 }

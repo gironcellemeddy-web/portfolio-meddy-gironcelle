@@ -4,7 +4,7 @@ import { SpotlightName } from "@/components/interactive/SpotlightName";
 import { ContactButton } from "@/components/ui/ContactButton";
 // Effets WebGL du hero : chargés côté client, seulement si l'appareil les
 // supporte (voir useEffectsTier). Le hero reste complet sans eux.
-import { HeroEffects } from "@/components/effects/HeroEffects";
+import { HeroEffects, LiquidNameEffect } from "@/components/effects/HeroEffects";
 
 // Hero éditorial : le nom EST l'objet — typographie géante en dégradé
 // métallique, révélée par un halo de studio qui suit le curseur. Accroche et
@@ -21,18 +21,20 @@ export function Hero() {
 
       {/* Nom géant, pleine largeur, sculpté par la lumière */}
       <SpotlightName>
-        <div className="-mx-5 overflow-hidden sm:-mx-8 md:-mx-10">
+        <div className="relative -mx-5 overflow-hidden sm:-mx-8 md:-mx-10">
           <h1
             className="font-display line-mask w-full whitespace-nowrap text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: "clamp(2.4rem, 9vw, 10.5rem)" }}
           >
             <span
+              data-liquid-target
               className="line-inner hero-grad"
               style={{ "--line-delay": "120ms" } as CSSProperties}
             >
               Meddy Gironcelle
             </span>
           </h1>
+          <LiquidNameEffect text="Meddy Gironcelle" />
         </div>
       </SpotlightName>
 
