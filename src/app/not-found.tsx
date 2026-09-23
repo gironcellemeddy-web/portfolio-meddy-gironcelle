@@ -7,8 +7,7 @@ export default function NotFound() {
     <>
     <main className="flex min-h-svh flex-col items-center justify-center gap-6 px-5 text-center">
       <h1
-        className="hero-grad font-display font-black uppercase leading-none tracking-tight"
-        style={{ fontSize: "clamp(6rem, 24vw, 18rem)" }}
+        className="hero-grad font-display font-black uppercase leading-none tracking-tight t-display"
         aria-label="Erreur 404 — page introuvable"
       >
         404
@@ -18,7 +17,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="font-display inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-3 text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink/10 sm:text-sm"
+        className="btn btn-secondary"
       >
         <ArrowLeft className="h-4 w-4" />
         Retour à l&apos;accueil

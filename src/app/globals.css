@@ -339,3 +339,67 @@ html {
     rgba(255, 255, 255, 0.45) 100%
   );
 }
+
+/* ============================================================
+   SYSTÈME DE DESIGN — échelle unique.
+   L'audit relevait 14 tailles de titre, 9 rayons et 6 espacements
+   de section : autant de valeurs proches mais jamais identiques, qui
+   empêchaient la page d'avoir un rythme régulier.
+   ============================================================ */
+
+/* Typographie : six degrés, du titre d'accueil au texte secondaire. */
+.t-display { font-size: clamp(2.4rem, 9vw, 10.5rem); line-height: 0.92; letter-spacing: -0.03em; }
+.t-h1      { font-size: clamp(2.6rem, 10vw, 9rem);   line-height: 0.94; letter-spacing: -0.025em; }
+.t-h2      { font-size: clamp(2.2rem, 6.5vw, 5rem);  line-height: 0.98; letter-spacing: -0.02em; }
+.t-h3      { font-size: clamp(1.15rem, 2.2vw, 2rem); line-height: 1.15; letter-spacing: -0.01em; }
+.t-body-l  { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.6; }
+.t-body    { font-size: 0.95rem; line-height: 1.6; }
+
+/* Chiffres géants des listes numérotées (savoir-faire). */
+.t-numeral { font-size: clamp(2.8rem, 9vw, 120px); line-height: 0.85; letter-spacing: -0.04em; }
+
+/* Rayons : trois valeurs, plus aucune valeur intermédiaire. */
+.r-pill { border-radius: 999px; }
+.r-card { border-radius: 1.5rem; }
+.r-bloc { border-radius: 2.75rem; }
+
+/* Rythme vertical : deux respirations, l'une normale, l'autre ample. */
+.s-section { padding-top: 6rem; padding-bottom: 6rem; }
+.s-section-lg { padding-top: 8rem; padding-bottom: 8rem; }
+@media (min-width: 640px) {
+  .s-section { padding-top: 8rem; padding-bottom: 8rem; }
+  .s-section-lg { padding-top: 11rem; padding-bottom: 11rem; }
+}
+
+/* Boutons : trois variantes, et rien d'autre. */
+.btn {
+  font-family: var(--font-display), sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.85rem 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+@media (min-width: 640px) { .btn { padding: 0.95rem 2.5rem; font-size: 0.85rem; } }
+
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--ember); color: #fff; }
+
+.btn-secondary { border: 2px solid var(--ink); color: var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+
+.btn-ghost { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.btn-ghost:hover { color: var(--ember-text); }
+
+/* Variantes sur fond inversé (section savoir-faire). */
+.on-ink .btn-secondary { border-color: var(--paper); color: var(--paper); }
+.on-ink .btn-secondary:hover { background: var(--paper); color: var(--ink); }
+
+/* Coins supérieurs des blocs pleine largeur (section inversée). */
+.r-bloc-top { border-top-left-radius: 2.75rem; border-top-right-radius: 2.75rem; }
+@media (min-width: 768px) { .r-bloc-top { border-top-left-radius: 3.5rem; border-top-right-radius: 3.5rem; } }

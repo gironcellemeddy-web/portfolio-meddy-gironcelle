@@ -139,7 +139,7 @@ export function IslandShowcase() {
     <section
       ref={sectionRef}
       id="ile"
-      className="anchor relative overflow-hidden py-20 sm:py-28"
+      className="anchor s-section relative overflow-hidden"
     >
       {/* Fond océan permanent : la section reste habitée même si les tuiles
           d'élévation ne répondent pas. */}
@@ -172,8 +172,7 @@ export function IslandShowcase() {
         <div className="text-center">
           <p className="eyebrow mb-3">/ 04 — Photographie</p>
           <h2
-            className="hero-grad font-display font-black uppercase leading-[0.95] tracking-tight"
-            style={{ fontSize: "clamp(2.2rem, 7vw, 5rem)" }}
+            className="hero-grad font-display font-black uppercase leading-[0.95] tracking-tight t-h2"
           >
             Mon île, mon regard
           </h2>
@@ -245,7 +244,7 @@ export function IslandShowcase() {
 
         <Link
           href="/photographie"
-          className="font-display inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-3 text-xs font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-paper sm:text-sm"
+          className="btn btn-secondary"
         >
           Voir les {photos.length} photographies
           <ArrowUpRight className="h-4 w-4" />

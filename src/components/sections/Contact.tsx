@@ -5,7 +5,7 @@ import { InstagramIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 
 export function Contact() {
   return (
-    <section id="contact" className="anchor relative mx-auto w-full max-w-6xl px-5 pb-16 pt-24 sm:pt-32">
+    <section id="contact" className="anchor s-section relative mx-auto w-full max-w-6xl px-5">
       <Reveal>
         <div className="relative overflow-hidden rounded-[var(--radius-xl2)] bg-ink px-6 py-16 text-paper shadow-lift sm:px-14 sm:py-24">
           {/* Lueur d'ambiance */}
@@ -31,7 +31,7 @@ export function Contact() {
             <a
               href="/cv-meddy-gironcelle.pdf"
               download
-              className="font-display inline-flex items-center gap-2 rounded-full border-2 border-paper/40 px-8 py-3 text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-paper/10 sm:px-10 sm:py-3.5 sm:text-sm"
+              className="btn btn-secondary"
             >
               Télécharger le CV <Download className="h-4 w-4" />
             </a>

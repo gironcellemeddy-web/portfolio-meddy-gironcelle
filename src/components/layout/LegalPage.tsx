@@ -38,8 +38,7 @@ export function LegalPage({
 
         <p className="eyebrow mb-3">{eyebrow}</p>
         <h1
-          className="font-display font-black leading-[0.95] tracking-tight"
-          style={{ fontSize: "clamp(2.2rem, 7vw, 4.5rem)" }}
+          className="font-display font-black leading-[0.95] tracking-tight t-h2"
         >
           {title}
         </h1>

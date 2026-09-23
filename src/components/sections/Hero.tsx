@@ -22,8 +22,7 @@ export function Hero() {
       <SpotlightName>
         <div className="relative -mx-5 overflow-hidden sm:-mx-8 md:-mx-10">
           <h1
-            className="font-display line-mask w-full whitespace-nowrap text-center font-black uppercase leading-none tracking-tight"
-            style={{ fontSize: "clamp(2.4rem, 9vw, 10.5rem)" }}
+            className="font-display line-mask w-full whitespace-nowrap text-center font-black uppercase leading-none tracking-tight t-display"
           >
             <span
               data-liquid-target
@@ -40,8 +39,8 @@ export function Hero() {
       {/* Barre basse : accroche + contact */}
       <div className="flex flex-wrap items-end justify-between gap-6">
         <p
-          className="animate-fade-up max-w-[240px] font-light uppercase leading-snug tracking-wide text-muted sm:max-w-[300px] md:max-w-[360px]"
-          style={{ ...delay(300), fontSize: "clamp(0.75rem, 1.4vw, 1.4rem)" }}
+          className="animate-fade-up max-w-[240px] font-light uppercase leading-snug tracking-wide text-muted sm:max-w-[300px] md:max-w-[360px] t-body-l"
+          style={{ ...delay(300) }}
         >
           Un créatif en communication &amp; marketing digital, basé à La Réunion
         </p>

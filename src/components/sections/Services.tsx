@@ -31,15 +31,14 @@ export function Services() {
   return (
     <section
       id="services"
-      className="anchor relative bg-ink px-5 py-20 text-paper sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32 rounded-t-[40px]"
+      className="anchor s-section-lg on-ink relative r-bloc-top bg-ink px-5 text-paper sm:px-8 md:px-10"
     >
       <Reveal>
         <p className="eyebrow mb-3 text-center" style={{ color: "color-mix(in srgb, var(--paper) 62%, transparent)" }}>
           / 01 — Savoir-faire
         </p>
         <h2
-          className="font-display mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28"
-          style={{ fontSize: "clamp(2.6rem, 10.5vw, 150px)" }}
+          className="font-display mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28 t-h1"
         >
           Savoir-faire
         </h2>
@@ -53,21 +52,18 @@ export function Services() {
               style={{ borderColor: "color-mix(in srgb, var(--paper) 18%, transparent)" }}
             >
               <span
-                className="font-display shrink-0 font-black leading-none"
-                style={{ fontSize: "clamp(3rem, 10vw, 140px)" }}
+                className="font-display shrink-0 font-black leading-none t-numeral"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="pt-2 sm:pt-3">
                 <h3
-                  className="font-display font-medium uppercase tracking-wide"
-                  style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)" }}
+                  className="font-display font-medium uppercase tracking-wide t-h3"
                 >
                   {s.name}
                 </h3>
                 <p
-                  className="mt-2 max-w-2xl font-light leading-relaxed opacity-60"
-                  style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)" }}
+                  className="mt-2 max-w-2xl font-light leading-relaxed opacity-60 t-body-l"
                 >
                   {s.desc}
                 </p>

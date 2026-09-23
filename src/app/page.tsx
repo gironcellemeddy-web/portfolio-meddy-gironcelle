@@ -69,8 +69,7 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
             <Reveal delay={60}>
               <h2
-                className="hero-grad font-display max-w-xl font-black uppercase leading-[1.02] tracking-tight"
-                style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)" }}
+                className="hero-grad font-display max-w-xl font-black uppercase leading-[1.02] tracking-tight t-h2"
               >
                 Mon parcours, version arcade
               </h2>
