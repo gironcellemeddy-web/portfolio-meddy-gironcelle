@@ -2,7 +2,6 @@ import Image from "next/image";
 import { projects } from "@/lib/projects";
 import { photos } from "@/lib/photos";
 import { Reveal } from "@/components/ui/Reveal";
-import { Glass } from "@/components/effects/Glass";
 
 // Bandeau de confiance sous le hero : les organisations qui m'ont formé ou
 // accueilli en stage (seul contenu qui n'existe nulle part ailleurs sur la
@@ -36,14 +35,13 @@ export function TrustBar() {
             fond sombre comme sur fond clair. */}
         <ul className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {LOGOS.map((l) => (
-            <li key={l.src} className="transition-transform duration-500 hover:-translate-y-0.5">
-              <Glass radius={12} className="h-16 w-32 sm:h-20 sm:w-40">
-                <span className="flex h-full w-full items-center justify-center rounded-xl bg-white/95 px-3 ring-1 ring-black/5 sm:px-4">
-                  <span className="relative h-10 w-full sm:h-12">
-                    <Image src={l.src} alt={l.alt} fill sizes="160px" className="object-contain" />
-                  </span>
-                </span>
-              </Glass>
+            <li
+              key={l.src}
+              className="glass-tile flex h-16 w-32 items-center justify-center rounded-xl px-3 transition-transform duration-500 hover:-translate-y-0.5 sm:h-20 sm:w-40 sm:px-4"
+            >
+              <span className="relative h-10 w-full sm:h-12">
+                <Image src={l.src} alt={l.alt} fill sizes="160px" className="object-contain" />
+              </span>
             </li>
           ))}
         </ul>
