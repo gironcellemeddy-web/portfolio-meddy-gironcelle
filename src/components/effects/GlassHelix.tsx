@@ -27,9 +27,9 @@ import { useEffectsTier } from "@/hooks/useEffectsTier";
  * réservé aux ordinateurs. Ailleurs, le fond épuré du site reste tel quel.
  */
 
-const TURNS = 5; // nombre de spires
-const HEIGHT = 26; // hauteur totale de l'hélice
-const RADIUS = 2.6;
+const TURNS = 6; // nombre de spires
+const HEIGHT = 30; // hauteur totale de l'hélice
+const RADIUS = 2.35;
 
 // Progression de teinte, choisie dans la palette du site pour ne jamais jurer.
 const TINTS_DARK = ["#2a52e0", "#1fb6c9", "#ffa030", "#ef5a17"];
@@ -60,8 +60,8 @@ function Helix({ dark }: { dark: boolean }) {
     const curve = new CatmullRomCurve3(points);
 
     // Section du ruban : large et très fin, comme une lame de verre.
-    const w = 0.95;
-    const th = 0.055;
+    const w = 1.15; // largeur de la lame
+    const th = 0.05; // épaisseur, volontairement fine
     const shape = new Shape();
     shape.moveTo(-w, -th);
     shape.lineTo(w, -th);
@@ -87,11 +87,16 @@ function Helix({ dark }: { dark: boolean }) {
     const p = progress.current;
 
     // 1) On descend le long du ruban.
-    camera.position.y = HEIGHT * (0.5 - p) - 0.5;
-    camera.lookAt(0, camera.position.y - 1.2, 0);
+    camera.position.y = HEIGHT * (0.5 - p);
+    // Visée légèrement plus bas que la caméra : l'hélice reste centrée à
+    // l'écran, sans jamais dériver vers un bord.
+    camera.lookAt(0, camera.position.y - 0.9, 0);
 
     // 2) Le ruban tourne sur son axe.
-    if (group.current) group.current.rotation.y = p * Math.PI * 2.2;
+    if (group.current) {
+      group.current.rotation.y = p * Math.PI * 2.6;
+      group.current.rotation.z = Math.sin(p * Math.PI) * 0.06;
+    }
 
     // 3) La teinte du verre progresse avec la page.
     tintAt(p, dark ? TINTS_DARK : TINTS_LIGHT, color);
@@ -103,19 +108,19 @@ function Helix({ dark }: { dark: boolean }) {
   });
 
   return (
-    <group ref={group} position={[1.1, 0, 0]}>
+    <group ref={group} position={[0, 0, 0]}>
       <mesh ref={mesh} geometry={geometry}>
         <meshPhysicalMaterial
           transmission={1}
-          thickness={1.6}
-          roughness={0.06}
-          ior={1.46}
+          thickness={2.1}
+          roughness={0.03}
+          ior={1.5}
           clearcoat={1}
           clearcoatRoughness={0.05}
           iridescence={1}
-          iridescenceIOR={1.32}
-          iridescenceThicknessRange={[100, 520]}
-          attenuationDistance={2.4}
+          iridescenceIOR={1.28}
+          iridescenceThicknessRange={[140, 420]}
+          attenuationDistance={3.2}
           envMapIntensity={dark ? 1.5 : 1.1}
           toneMapped={false}
         />
@@ -144,7 +149,7 @@ export function GlassHelix() {
       className="pointer-events-none fixed inset-0"
       style={{ zIndex: -20, opacity: dark ? 0.85 : 0.7 }}
     >
-      <Canvas camera={{ position: [0, 0, 7.5], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true }}>
+      <Canvas camera={{ position: [0, 0, 8.4], fov: 38 }} dpr={[1, 1.5]} gl={{ antialias: true }}>
         {/* Environnement construit en code : aucun fichier externe à charger,
             mais le verre a de quoi réfléchir et réfracter. */}
         <Environment resolution={192}>
