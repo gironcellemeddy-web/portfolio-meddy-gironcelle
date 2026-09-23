@@ -90,6 +90,10 @@ export default function MentionsLegales() {
           · relief : Mapzen Terrain Tiles, données SRTM (U.S. Geological Survey).
         </li>
         <li>Contour géographique de l&apos;île : données ouvertes IGN / OpenStreetMap (licence ODbL).</li>
+        <li>
+          Effets visuels : Paper Shaders (licence Apache 2.0), ShaderGradient,
+          three.js, React Three Fiber et liquid-glass-react (licence MIT).
+        </li>
       </ul>
 
       <h2>5. Données personnelles et cookies</h2>

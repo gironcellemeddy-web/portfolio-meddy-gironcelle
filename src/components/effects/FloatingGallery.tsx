@@ -18,8 +18,10 @@ import { useEffectsTier } from "@/hooks/useEffectsTier";
 const PICKS = [12, 19, 25, 31, 40, 47, 55, 63, 70];
 
 // Sert les images déjà redimensionnées par Next plutôt que les originaux.
+// La qualité 75 est la seule autorisée par défaut depuis Next 16 (toute autre
+// valeur renvoie une erreur 400 et la texture resterait vide).
 function optimized(src: string) {
-  return `/_next/image?url=${encodeURIComponent(src)}&w=640&q=60`;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=640&q=75`;
 }
 
 function Orbit() {
