@@ -12,6 +12,9 @@
   /* Accents : orange braise (signature) + cobalt (fonctionnel) */
   --ember: #ef5a17;
   --ember-2: #ff7a3d;
+  /* Variante lisible de la braise pour le TEXTE sur fond clair :
+     #ef5a17 ne donnait que 3,1:1, sous le minimum de 4,5:1. */
+  --ember-text: #c2410c;
   --ember-soft: #fce7db;
   --cobalt: #2a52e0;
   --cobalt-soft: #e8ecfc;
@@ -35,6 +38,7 @@
   --muted-2: #8a9199; /* 6,1:1 sur --paper sombre (AA) */
   --ember: #ff6a2b;
   --ember-2: #ff8a55;
+  --ember-text: #ff8a55;
   --ember-soft: #2a1a12;
   --cobalt: #6f8dff;
   --cobalt-soft: #161c33;
@@ -76,6 +80,7 @@
   --color-ember: var(--ember);
   --color-ember-2: var(--ember-2);
   --color-ember-soft: var(--ember-soft);
+  --color-ember-text: var(--ember-text);
   --color-cobalt: var(--cobalt);
   --color-cobalt-soft: var(--cobalt-soft);
   --font-sans: var(--font-geist-sans);

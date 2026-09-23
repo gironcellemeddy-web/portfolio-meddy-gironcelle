@@ -31,7 +31,7 @@ export function LegalPage({
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <span className="font-display text-base font-bold tracking-tight">
-              Meddy<span className="text-ember">.</span>
+              Meddy<span className="text-ember-text">.</span>
             </span>
           </div>
         </header>

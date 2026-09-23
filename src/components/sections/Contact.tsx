@@ -33,7 +33,7 @@ export function Contact() {
               download
               className="font-display inline-flex items-center gap-2 rounded-full border-2 border-paper/40 px-8 py-3 text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-paper/10 sm:px-10 sm:py-3.5 sm:text-sm"
             >
-              Le CV <Download className="h-4 w-4" />
+              Télécharger le CV <Download className="h-4 w-4" />
             </a>
           </div>
 
@@ -43,7 +43,7 @@ export function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-paper/25 transition-colors hover:border-ember hover:text-ember"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-paper/25 transition-colors hover:border-ember hover:text-ember-text"
             >
               <InstagramIcon className="h-4.5 w-4.5" />
             </a>
@@ -52,7 +52,7 @@ export function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-paper/25 transition-colors hover:border-ember hover:text-ember"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-paper/25 transition-colors hover:border-ember hover:text-ember-text"
             >
               <LinkedinIcon className="h-4.5 w-4.5" />
             </a>

@@ -6,7 +6,7 @@ export function Work() {
   return (
     <section id="travaux" className="anchor mx-auto w-full max-w-6xl px-5 py-24 sm:py-32">
       <Reveal>
-        <p className="eyebrow mb-3">/ 04 — Réalisations</p>
+        <p className="eyebrow mb-3">/ 02 — Réalisations</p>
       </Reveal>
 
       <div className="mb-12 flex flex-wrap items-end justify-between gap-6">

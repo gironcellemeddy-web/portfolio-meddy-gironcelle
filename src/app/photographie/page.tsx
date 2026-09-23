@@ -36,7 +36,7 @@ export default function PhotographiePage() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <Link href="/" className="font-display text-base font-bold tracking-tight">
-            Meddy<span className="text-ember">.</span>
+            Meddy<span className="text-ember-text">.</span>
           </Link>
         </div>
       </header>
@@ -48,7 +48,7 @@ export default function PhotographiePage() {
         </Reveal>
         <Reveal delay={60}>
           <h1 className="font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-7xl">
-            Photo<span className="text-ember">graphie</span>
+            Photo<span className="text-ember-text">graphie</span>
           </h1>
         </Reveal>
         <Reveal delay={140}>
@@ -62,17 +62,17 @@ export default function PhotographiePage() {
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-ember/40 bg-ember-soft px-3.5 py-1.5 text-xs font-medium text-ember">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-ember/40 bg-ember-soft px-3.5 py-1.5 text-xs font-medium text-ember-text">
               <Smartphone className="h-3.5 w-3.5" /> iPhone 17 Pro
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
               <Smartphone className="h-3.5 w-3.5" /> Galaxy S22 Ultra
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              <SlidersHorizontal className="h-3.5 w-3.5 text-ember" /> Adobe Lightroom
+              <SlidersHorizontal className="h-3.5 w-3.5 text-ember-text" /> Adobe Lightroom
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted">
-              <Images className="h-3.5 w-3.5 text-ember" /> {photos.length} clichés
+              <Images className="h-3.5 w-3.5 text-ember-text" /> {photos.length} clichés
             </span>
           </div>
         </Reveal>

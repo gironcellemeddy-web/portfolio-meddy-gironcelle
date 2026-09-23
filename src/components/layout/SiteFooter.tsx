@@ -23,7 +23,7 @@ export function SiteFooter() {
       <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-start">
         <div>
           <p className="font-display text-lg font-bold tracking-tight">
-            Meddy<span className="text-ember">.</span>
+            Meddy<span className="text-ember-text">.</span>
           </p>
           <p className="mt-1 text-xs uppercase tracking-wider text-muted-2">
             Communication &amp; Marketing digital · La Réunion

@@ -40,7 +40,7 @@ export function SiteHeader() {
         }`}
       >
         <a href="#top" className="font-display text-base font-bold tracking-tight">
-          Meddy<span className="text-ember">.</span>
+          Meddy<span className="text-ember-text">.</span>
         </a>
 
         <nav className="hidden items-center gap-1 sm:flex" aria-label="Navigation principale">
@@ -55,7 +55,7 @@ export function SiteHeader() {
           ))}
           <Link
             href="/photographie"
-            className="font-display inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:border-ember hover:text-ember"
+            className="font-display inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:border-ember hover:text-ember-text"
           >
             <Camera className="h-3.5 w-3.5" />
             Photographie
@@ -81,7 +81,7 @@ export function SiteHeader() {
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ember hover:text-ember sm:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ember hover:text-ember-text sm:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>

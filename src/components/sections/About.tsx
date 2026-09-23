@@ -20,6 +20,7 @@ export function About() {
       className="anchor relative flex min-h-screen flex-col items-center justify-center gap-10 px-5 py-20 sm:gap-14 sm:px-8 md:gap-16 md:px-10"
     >
       <Reveal>
+        <p className="eyebrow mb-3 text-center">/ 03 — À propos</p>
         <h2
           className="hero-grad font-display text-center font-black uppercase leading-none tracking-tight"
           style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}

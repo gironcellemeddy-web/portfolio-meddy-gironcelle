@@ -170,7 +170,7 @@ export function IslandShowcase() {
 
       <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-10 px-5">
         <div className="text-center">
-          <p className="eyebrow mb-3">/ 03 — Photographie</p>
+          <p className="eyebrow mb-3">/ 04 — Photographie</p>
           <h2
             className="hero-grad font-display font-black uppercase leading-[0.95] tracking-tight"
             style={{ fontSize: "clamp(2.2rem, 7vw, 5rem)" }}

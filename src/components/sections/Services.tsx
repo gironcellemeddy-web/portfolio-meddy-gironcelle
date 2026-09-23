@@ -34,6 +34,9 @@ export function Services() {
       className="anchor relative bg-ink px-5 py-20 text-paper sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32 rounded-t-[40px]"
     >
       <Reveal>
+        <p className="eyebrow mb-3 text-center" style={{ color: "color-mix(in srgb, var(--paper) 62%, transparent)" }}>
+          / 01 — Savoir-faire
+        </p>
         <h2
           className="font-display mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28"
           style={{ fontSize: "clamp(2.6rem, 10.5vw, 150px)" }}

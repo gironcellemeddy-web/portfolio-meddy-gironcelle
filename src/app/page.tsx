@@ -7,7 +7,6 @@ import { Marquee } from "@/components/sections/Marquee";
 import { IslandShowcase } from "@/components/sections/IslandShowcase";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
-import { FeaturedStack } from "@/components/sections/FeaturedStack";
 import { Work } from "@/components/sections/Work";
 import { Contact } from "@/components/sections/Contact";
 import { PacCV } from "@/components/game/PacCV";
@@ -53,11 +52,10 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <Marquee />
+        <Services />
+        <Work />
         <About />
         <IslandShowcase />
-        <Services />
-        <FeaturedStack />
-        <Work />
         <Contact />
 
         {/* Bonus arcade — mon parcours en jeu, tout en bas de page */}
@@ -84,7 +82,7 @@ export default function Home() {
                 <a
                   href="/cv-meddy-gironcelle.pdf"
                   download
-                  className="inline-flex items-center gap-1 font-medium text-ink underline decoration-line underline-offset-4 transition-colors hover:text-ember"
+                  className="inline-flex items-center gap-1 font-medium text-ink underline decoration-line underline-offset-4 transition-colors hover:text-ember-text"
                 >
                   la version classique <Download className="h-3 w-3" />
                 </a>
