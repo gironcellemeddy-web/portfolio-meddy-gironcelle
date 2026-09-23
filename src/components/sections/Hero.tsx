@@ -2,6 +2,9 @@ import type { CSSProperties } from "react";
 import { ArrowDown } from "lucide-react";
 import { SpotlightName } from "@/components/interactive/SpotlightName";
 import { ContactButton } from "@/components/ui/ContactButton";
+// Effets WebGL du hero : chargés côté client, seulement si l'appareil les
+// supporte (voir useEffectsTier). Le hero reste complet sans eux.
+import { HeroEffects } from "@/components/effects/HeroEffects";
 
 // Hero éditorial : le nom EST l'objet — typographie géante en dégradé
 // métallique, révélée par un halo de studio qui suit le curseur. Accroche et
@@ -14,6 +17,8 @@ export function Hero() {
       id="top"
       className="anchor relative flex min-h-[74svh] flex-col justify-center gap-8 overflow-x-clip px-5 pb-6 pt-32 sm:px-8 sm:pt-36 md:px-10"
     >
+      <HeroEffects />
+
       {/* Nom géant, pleine largeur, sculpté par la lumière */}
       <SpotlightName>
         <div className="-mx-5 overflow-hidden sm:-mx-8 md:-mx-10">
