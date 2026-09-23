@@ -1,6 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+
+// Fond photographique vivant (ordinateur uniquement), chargé à la demande.
+const WaterBackdrop = dynamic(
+  () => import("@/components/effects/WaterBackdrop").then((m) => m.WaterBackdrop),
+  { ssr: false },
+);
 
 /**
  * Arrière-plan du site : volontairement nu.
@@ -28,6 +35,18 @@ export function BackgroundDecor() {
   }, []);
 
   return (
+    <>
+      {/* Descente de l'île au fil de la page : photos de Meddy, eau animée */}
+      <WaterBackdrop />
+
+      {/* Voile de lisibilité : le fond reste perceptible, les textes priment.
+          Sur mobile, il couvre le fond fixe défini plus bas. */}
+      <div
+        aria-hidden
+        className="water-veil pointer-events-none fixed inset-0"
+        style={{ zIndex: -15 }}
+      />
+
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
       {/* Profondeur : le noir absolu paraît plat, une lueur très faible en
           haut de page lui donne du relief sans dessiner de forme. */}
@@ -41,5 +60,6 @@ export function BackgroundDecor() {
       {/* Lueur qui suit le curseur */}
       <div ref={glowRef} className="absolute inset-0" />
     </div>
+    </>
   );
 }
