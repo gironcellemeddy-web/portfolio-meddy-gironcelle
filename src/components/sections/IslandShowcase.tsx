@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { photos } from "@/lib/photos";
 import { ISLAND_PATH, ISLAND_VIEWBOX, ISLAND_W, ISLAND_H } from "@/lib/islandShape";
+
+// Photos flottantes en 3D : décor, chargé à la demande, ordinateur seulement.
+const FloatingGallery = dynamic(
+  () => import("@/components/effects/FloatingGallery").then((m) => m.FloatingGallery),
+  { ssr: false },
+);
 
 /* Relief 3D réel de La Réunion (MapLibre + tuiles d'élévation) en toile de
    fond, surmonté de la silhouette de l'île dans laquelle défilent mes
@@ -158,6 +165,9 @@ export function IslandShowcase() {
         aria-hidden
         className={`absolute inset-0 transition-opacity duration-1000 ${mapReady ? "opacity-60 dark:opacity-75" : "opacity-0"}`}
       />
+      {/* Photos flottantes autour de l'île (décor) */}
+      <FloatingGallery />
+
       {/* Voile : fond estompé sur les bords, relief visible au centre */}
       <div
         aria-hidden
