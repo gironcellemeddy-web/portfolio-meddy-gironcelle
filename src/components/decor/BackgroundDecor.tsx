@@ -1,6 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+
+// Ruban de verre en hélice, piloté par le défilement (ordinateur uniquement).
+const GlassHelix = dynamic(
+  () => import("@/components/effects/GlassHelix").then((m) => m.GlassHelix),
+  { ssr: false },
+);
 
 /**
  * Arrière-plan du site : volontairement nu.
@@ -28,6 +35,9 @@ export function BackgroundDecor() {
   }, []);
 
   return (
+    <>
+      <GlassHelix />
+
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
       {/* Profondeur : le noir absolu paraît plat, une lueur très faible en
           haut de page lui donne du relief sans dessiner de forme. */}
@@ -41,5 +51,6 @@ export function BackgroundDecor() {
       {/* Lueur qui suit le curseur */}
       <div ref={glowRef} className="absolute inset-0" />
     </div>
+    </>
   );
 }
