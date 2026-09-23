@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Camera, Gamepad2, Menu, X } from "lucide-react";
 import { Magnetic } from "@/components/interactive/Magnetic";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Glass } from "@/components/effects/Glass";
 
 const ANCHORS = [
   { href: "#travaux", label: "Travaux" },
@@ -12,6 +13,18 @@ const ANCHORS = [
   { href: "#jeu", label: "Arcade" },
   { href: "#contact", label: "Contact" },
 ];
+
+/** Coque de la barre : verre réfractant quand elle est décollée du haut. */
+function GlassShell({ active, children }: { active: boolean; children: React.ReactNode }) {
+  const shape =
+    "relative flex w-full max-w-6xl items-center justify-between rounded-full px-4 py-2 sm:px-5";
+  if (!active) return <div className={`${shape} border border-transparent`}>{children}</div>;
+  return (
+    <Glass radius={999} className="w-full max-w-6xl shadow-soft">
+      <div className={shape}>{children}</div>
+    </Glass>
+  );
+}
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,11 +47,7 @@ export function SiteHeader() {
         Aller au contenu
       </a>
 
-      <div
-        className={`relative flex w-full max-w-6xl items-center justify-between rounded-full px-4 py-2 sm:px-5 ${
-          scrolled || open ? "glass shadow-soft" : "border border-transparent"
-        }`}
-      >
+      <GlassShell active={scrolled || open}>
         <a href="#top" className="font-display text-base font-bold tracking-tight">
           Meddy<span className="text-ember">.</span>
         </a>
@@ -119,7 +128,7 @@ export function SiteHeader() {
             </a>
           </nav>
         )}
-      </div>
+      </GlassShell>
     </header>
   );
 }
