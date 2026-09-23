@@ -334,36 +334,3 @@ html {
     rgba(255, 255, 255, 0.45) 100%
   );
 }
-
-/* Voile posé sur le fond photographique : garantit le contraste des textes
-   tout en laissant la cascade perceptible. Plus dense vers le bas, là où le
-   contenu est le plus dense. */
-.water-veil {
-  background:
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--paper) 62%, transparent) 0%,
-      color-mix(in srgb, var(--paper) 76%, transparent) 45%,
-      color-mix(in srgb, var(--paper) 84%, transparent) 100%
-    );
-}
-
-/* Mobile et navigateurs sans WebGL : une photographie fixe remplace le fond
-   animé (aucun calcul continu, batterie préservée). */
-@media (max-width: 1023px), (pointer: coarse) {
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -20;
-    pointer-events: none;
-    background-image: url("/photos/photo-18.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before { display: none; }
-  .water-veil { display: none; }
-}

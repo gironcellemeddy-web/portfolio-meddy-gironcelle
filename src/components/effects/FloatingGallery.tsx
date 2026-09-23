@@ -85,8 +85,9 @@ export function FloatingGallery() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <Canvas camera={{ position: [0, 0, 6], fov: 50 }} dpr={[1, 1.5]} gl={{ alpha: true }}>
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[3, 4, 5]} intensity={0.8} color="#ef5a17" />
+        {/* Lumière neutre : une lumière colorée teintait les plans en orange
+            tant que leur photographie n'était pas chargée. */}
+        <ambientLight intensity={1.4} />
         <Orbit />
       </Canvas>
     </div>
